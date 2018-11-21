@@ -15,9 +15,16 @@ public class multiplay extends AppCompatActivity {
 
     public void voteclick (View v){
 
-            Intent intent = new Intent(this,Muliti.class);
+        Intent intent = new Intent(this, Muliti.class);
 
-            startActivity(intent);
+        startActivity(intent);
 
+    }
+
+    public void drawMulti (View v){
+
+        Intent intent = new Intent(this, MapsActivity.class);
+
+        startActivity(intent);
     }
 }

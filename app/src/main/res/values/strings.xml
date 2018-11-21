@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Chase_the_Paint</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyAcNL9bZg13Yq6vZXQmdv_3bctOydgDlWc</string>
 </resources>
