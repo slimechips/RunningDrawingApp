@@ -4,6 +4,7 @@ package com.example.chaewoon.chase_the_paint;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Location;
 import android.os.Bundle;
@@ -36,6 +37,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements LocationListener,
         OnMapReadyCallback, GoogleApiClient
@@ -63,6 +68,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     Location mCurrentLocation;
     String mLastUpdateTime;
     private Location previousLocation;
+    Polyline line;
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -116,6 +122,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        line = mMap.addPolyline(new PolylineOptions().width(5).color(Color.RED));
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
@@ -291,6 +299,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     public void onLocationChanged(Location location) {
         previouslatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
+        LatLng newPoint = new LatLng(location.getLatitude(), location.getLongitude());
+        List<LatLng> points = line.getPoints();
+        points.add(newPoint);
+        line.setPoints(points);
+
         double rota = 0.0;
         double startrota = 0.0;
         if (previousLocation != null) {
@@ -310,6 +323,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
         animateMarker(new LatLng(location.getLatitude(), location.getLongitude()), false);
 //        new ServerConnAsync(handler, MapsActivity.this,location).execute();
+
 
 
     }
