@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.chaewoon.chase_the_paint">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature android:name="android.hardware.location.gps" />
 
     <application
         android:allowBackup="true"
@@ -16,10 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Single" />
-        <activity android:name=".Singleplay" />
-        <activity android:name=".Muliti" />
-        <activity android:name=".multiplay"></activity>
+        <activity android:name=".Single" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Singleplay" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".Muliti" android:parentActivityName=".MainActivity"/>
+        <activity android:name=".multiplay" android:parentActivityName=".MainActivity"/>
 
 
     </application>
