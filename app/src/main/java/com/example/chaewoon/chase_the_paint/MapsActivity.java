@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
@@ -44,7 +45,8 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements LocationListener,
         OnMapReadyCallback, GoogleApiClient
-                .ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+                .ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener/*, RotationGestureDetector.OnRotationGestureListener*/{
+    //private RotationGestureDetector mRotationDetector;
 
     private GoogleMap mMap;
     private final int MY_LOCATION_REQUEST_CODE = 100;
@@ -313,7 +315,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                     (), location.getLongitude()));
         } else {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
-
+            //mRotationDetector = new RotationGestureDetector(this);
         }
 
 
@@ -352,4 +354,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
             Log.d(TAG, "Location update resumed .....................");
         }
     }
+
+
+
+
 }
