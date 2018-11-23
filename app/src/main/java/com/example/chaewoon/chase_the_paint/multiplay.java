@@ -13,7 +13,7 @@ public class multiplay extends AppCompatActivity {
         setContentView(R.layout.activity_multiplay);
     }
 
-    public void voteclick (View v){
+    public void voteclick (View view){
 
         Intent intent = new Intent(this, Muliti.class);
 
@@ -21,7 +21,7 @@ public class multiplay extends AppCompatActivity {
 
     }
 
-    public void drawMulti (View v){
+    public void drawMulti (View view){
 
         Intent intent = new Intent(this, MapsActivity.class);
 

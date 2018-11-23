@@ -31,8 +31,8 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".multiplay"
-            android:parentActivityName=".MainActivity" />
-
+            android:parentActivityName=".MainActivity" >
+        </activity>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -48,7 +48,11 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:parentActivityName=".multiplay" >
+            <intent-filter>
+                <action android:name="android.intent.action.EDIT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
