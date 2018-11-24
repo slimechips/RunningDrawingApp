@@ -41,6 +41,66 @@
                 android:rotation="90"
                 android:text="Hide Map" />
 
+            <TextView
+                android:id="@+id/distanceField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="88dp"
+                android:rotation="90"
+                android:text="Distance: "
+                android:textAlignment="viewStart" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="21dp"
+                android:onClick="ChangeColour"
+                android:src="@android:color/holo_red_dark"
+                android:tag="red" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="68dp"
+                android:layout_marginBottom="21dp"
+                android:onClick="ChangeColour"
+                android:src="@android:color/holo_green_dark"
+                android:tag="green" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="118dp"
+                android:layout_marginBottom="20dp"
+                android:onClick="ChangeColour"
+                android:src="@android:color/holo_blue_bright"
+                android:tag="blue" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="166dp"
+                android:layout_marginBottom="21dp"
+                android:onClick="ChangeColour"
+                android:src="@android:color/holo_orange_light"
+                android:tag="yellow" />
+
         </RelativeLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

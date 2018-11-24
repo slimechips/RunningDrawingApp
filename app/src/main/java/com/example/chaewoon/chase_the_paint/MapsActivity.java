@@ -40,12 +40,12 @@ import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements LocationListener,
         OnMapReadyCallback, GoogleApiClient
@@ -57,7 +57,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     private GoogleMap mMap;
     private final int MY_LOCATION_REQUEST_CODE = 100;
     private Handler handler;
-    private Marker m;
 //    private GoogleApiClient googleApiClient;
 
     public final static int SENDING = 1;
@@ -76,7 +75,13 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     Location mCurrentLocation;
     String mLastUpdateTime;
     private Location previousLocation;
-    Polyline line;
+
+    List<Polyline> lines = new ArrayList<Polyline>();
+
+
+
+    public double estimatedDistance = 0;
+    TextView distancebox;
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -89,8 +94,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
-        vieww = (View)findViewById(R.id.entire_view);
+        distancebox = (TextView)findViewById(R.id.distanceField);
 
         createLocationRequest();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -134,14 +138,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        line = mMap.addPolyline(new PolylineOptions().width(5).color(Color.RED));
+        lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.RED)));
 
         // Add a marker in singapore and move the camera
         LatLng singapore = new LatLng(-1.3521, 103.8198);
 
-        m = mMap.addMarker(new MarkerOptions().position(singapore).title("Marker in " +
-                "singapore"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(singapore));
         mMap.getUiSettings().setRotateGesturesEnabled(false);
 
@@ -155,70 +156,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
 
     }
-
-
-    public void rotateMarker(final Marker marker, final float toRotation, final float st) {
-        final Handler handler = new Handler();
-        final long start = SystemClock.uptimeMillis();
-        final float startRotation = st;
-        final long duration = 1555;
-
-        final Interpolator interpolator = new LinearInterpolator();
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                long elapsed = SystemClock.uptimeMillis() - start;
-                float t = interpolator.getInterpolation((float) elapsed / duration);
-
-                float rot = t * toRotation + (1 - t) * startRotation;
-
-                marker.setRotation(-rot > 180 ? rot / 2 : rot);
-                if (t < 1.0) {
-                    // Post again 16ms later.
-                    handler.postDelayed(this, 16);
-                }
-            }
-        });
-    }
-
-
-    public void animateMarker(final LatLng toPosition, final boolean hideMarke) {
-        final Handler handler = new Handler();
-        final long start = SystemClock.uptimeMillis();
-        Projection proj = mMap.getProjection();
-        Point startPoint = proj.toScreenLocation(m.getPosition());
-        final LatLng startLatLng = proj.fromScreenLocation(startPoint);
-        final long duration = 5000;
-
-        final Interpolator interpolator = new LinearInterpolator();
-
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                long elapsed = SystemClock.uptimeMillis() - start;
-                float t = interpolator.getInterpolation((float) elapsed
-                        / duration);
-                double lng = t * toPosition.longitude + (1 - t)
-                        * startLatLng.longitude;
-                double lat = t * toPosition.latitude + (1 - t)
-                        * startLatLng.latitude;
-                m.setPosition(new LatLng(lat, lng));
-
-                if (t < 1.0) {
-                    // Post again 16ms later.
-                    handler.postDelayed(this, 16);
-                } else {
-                    if (hideMarke) {
-                        m.setVisible(false);
-                    } else {
-                        m.setVisible(true);
-                    }
-                }
-            }
-        });
-    }
-
     private double bearingBetweenLocations(LatLng latLng1, LatLng latLng2) {
 
         double PI = 3.14159;
@@ -308,15 +245,18 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
     LatLng previouslatLng;
     List<LatLng> points;
+    LatLng newPoint;
 
     @Override
     public void onLocationChanged(Location location) {
-        previouslatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
-        LatLng newPoint = new LatLng(location.getLatitude(), location.getLongitude());
-        points = line.getPoints();
+        if (newPoint != null)
+        {
+            previouslatLng = newPoint;
+        }
+        newPoint = new LatLng(location.getLatitude(), location.getLongitude());
+        points = lines.get(lines.size()-1).getPoints();
         points.add(newPoint);
-        line.setPoints(points);
+        lines.get(lines.size()-1).setPoints(points);
 
         double rota = 0.0;
         double startrota = 0.0;
@@ -324,21 +264,35 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
             rota = bearingBetweenLocations(previouslatLng, new LatLng(location.getLatitude
                     (), location.getLongitude()));
+
+            final int R = 6371; // Radius of the earth
+
+            double lat1 = previouslatLng.latitude;
+            double lat2 = newPoint.latitude;
+            double lon1 = previouslatLng.longitude;
+            double lon2 = newPoint.longitude;
+            double latDistance = Math.toRadians(lat2 - lat1);
+            double lonDistance = Math.toRadians(lon2 - lon1);
+            double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                    + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                    * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            double distance = R * c * 1000; // convert to meters
+
+            distance = Math.pow(distance, 2);
+            estimatedDistance += distance;
+            distancebox.setText("Distance(m): " + String.format("%.02f", estimatedDistance));
+            Log.d(TAG, "distance :" + estimatedDistance);
         } else {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 20.0f));
             //mRotationDetector = new RotationGestureDetector(this);
         }
-
-
-        rotateMarker(m, (float) rota, (float) startrota);
-
 
         previousLocation = location;
         Log.d(TAG, "Firing onLocationChanged..........................");
         Log.d(TAG, "lat :" + location.getLatitude() + "long :" + location.getLongitude());
         Log.d(TAG, "bearing :" + location.getBearing());
 
-        animateMarker(new LatLng(location.getLatitude(), location.getLongitude()), false);
 //        new ServerConnAsync(handler, MapsActivity.this,location).execute();
 
 
@@ -366,7 +320,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         }
     }
 
-    public static boolean mapShown = true;
+    public boolean mapShown = true;
 
     public void hideShowMap (View view) {
         if (mapShown) {
@@ -418,39 +372,67 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     public void OnRotation(RotationGestureDetector rotationDetector) {
         Log.d("RotationGestureDetector", "Rotating");
         float angle = rotationDetector.getAngle();
-        angle = (float)Math.toRadians(angle);
-        angle = angle*0.1f;
+        angle = (float) Math.toRadians(angle);
+        angle = angle * 0.1f;
         Log.d("RotationGestureDetector", "Rotation: " + Float.toString(angle));
-        LatLng centrePoint = previouslatLng;
-        for (int i = 0; i < (points.size()-1); i++) {
-            LatLng currentPoint = points.get(i);
-            double ydiff = currentPoint.latitude - centrePoint.latitude;
-            double xdiff = currentPoint.longitude - centrePoint.longitude;
-            double r = Math.sqrt(xdiff*xdiff + ydiff*ydiff);
-            double teeta;
-            if (xdiff > 0) {
-                teeta = Math.atan(ydiff / xdiff);
+        LatLng centrePoint = newPoint;
+        for (int j = 0 ; j < lines.size(); j++){
+            points = lines.get(j).getPoints();
+            for (int i = 0; i < (points.size()); i++) {
+                LatLng currentPoint = points.get(i);
+                double ydiff = currentPoint.latitude - centrePoint.latitude;
+                double xdiff = currentPoint.longitude - centrePoint.longitude;
+                double r = Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+                double teeta;
+                if (xdiff > 0) {
+                    teeta = Math.atan(ydiff / xdiff);
+                } else if (xdiff < 0) {
+                    teeta = Math.atan(ydiff / xdiff) + Math.PI;
+                } else if (ydiff > 0) {
+                    teeta = Math.PI * 0.5;
+                } else {
+                    teeta = Math.PI * -0.5;
+                }
+                teeta = teeta + angle;
+                ydiff = r * Math.sin(teeta);
+                xdiff = r * Math.cos(teeta);
+                LatLng rotatedPoint = new LatLng((centrePoint.latitude + ydiff), (centrePoint.longitude + xdiff));
+                points.set(i, rotatedPoint);
+                Log.d("RotationGestureDetector", "Xdiff " + points.get(i).longitude);
             }
-            else if (xdiff < 0)
-            {
-                teeta = Math.atan(ydiff / xdiff) + Math.PI;
-            } else if (ydiff > 0) {
-                teeta = Math.PI * 0.5;
-            }
-            else {
-                teeta = Math.PI * -0.5;
-            }
-            teeta = teeta + angle;
-            ydiff = r * Math.sin(teeta);
-            xdiff = r * Math.cos(teeta);
-            LatLng rotatedPoint = new LatLng((centrePoint.latitude + ydiff), (centrePoint.longitude + xdiff));
-            points.set(i, rotatedPoint);
-            Log.d("RotationGestureDetector", "Xdiff " + points.get(i).longitude);
-
-
+            lines.get(j).setPoints(points);
         }
-        line.setPoints(points);
     }
 
+    public void ChangeColour(View view) {
+        List<LatLng>startPoint = new ArrayList<>();
+        startPoint.add(newPoint);
+        String colour = view.getTag().toString();
+        Log.d(TAG, "change colour " + colour);
+        if (Objects.equals(colour,"red")) {
+            Log.d(TAG, "changing to red");
+            lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.RED)));
+            lines.get(lines.size()-1).setPoints(startPoint);
+        } else
+        if (Objects.equals(colour,"green")) {
+            Log.d(TAG, "changing to green");
+            lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.GREEN)));
+            lines.get(lines.size()-1).setPoints(startPoint);
+        } else
+        if (Objects.equals(colour,"blue")) {
+            Log.d(TAG, "changing to blue");
+            lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.BLUE)));
+            lines.get(lines.size()-1).setPoints(startPoint);
+
+        } else
+        if (Objects.equals(colour,"yellow")) {
+            Log.d(TAG, "changing to yellow");
+            lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.YELLOW)));
+            lines.get(lines.size()-1).setPoints(startPoint);
+
+        } else {
+            Log.d(TAG, "no valid colour");
+        }
+    }
 
 }
