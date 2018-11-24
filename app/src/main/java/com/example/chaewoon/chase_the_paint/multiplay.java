@@ -3,6 +3,8 @@ package com.example.chaewoon.chase_the_paint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 public class multiplay extends AppCompatActivity {
@@ -26,5 +28,10 @@ public class multiplay extends AppCompatActivity {
         Intent intent = new Intent(this, MapsActivity.class);
 
         startActivity(intent);
+    }
+    public boolean dispatchTouchEvent(MotionEvent event) {
+
+        Log.d("RotationGestureDetector", "Touch detected");
+        return super.dispatchTouchEvent(event);
     }
 }

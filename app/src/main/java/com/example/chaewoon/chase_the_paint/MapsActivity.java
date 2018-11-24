@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -48,8 +49,10 @@ import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements LocationListener,
         OnMapReadyCallback, GoogleApiClient
-                .ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener/*, RotationGestureDetector.OnRotationGestureListener*/{
-    //private RotationGestureDetector mRotationDetector;
+                .ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RotationGestureDetector.OnRotationGestureListener{
+    private RotationGestureDetector mRotationDetector;
+
+    View vieww;
 
     private GoogleMap mMap;
     private final int MY_LOCATION_REQUEST_CODE = 100;
@@ -87,12 +90,16 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        vieww = (View)findViewById(R.id.entire_view);
+
         createLocationRequest();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
+
+        mRotationDetector = new RotationGestureDetector(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -127,8 +134,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-
 
         line = mMap.addPolyline(new PolylineOptions().width(5).color(Color.RED));
 
@@ -302,13 +307,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     }
 
     LatLng previouslatLng;
+    List<LatLng> points;
 
     @Override
     public void onLocationChanged(Location location) {
         previouslatLng = new LatLng(location.getLatitude(), location.getLongitude());
 
         LatLng newPoint = new LatLng(location.getLatitude(), location.getLongitude());
-        List<LatLng> points = line.getPoints();
+        points = line.getPoints();
         points.add(newPoint);
         line.setPoints(points);
 
@@ -319,7 +325,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
             rota = bearingBetweenLocations(previouslatLng, new LatLng(location.getLatitude
                     (), location.getLongitude()));
         } else {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 18.0f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 20.0f));
             //mRotationDetector = new RotationGestureDetector(this);
         }
 
@@ -397,6 +403,53 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
             }
         }
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+
+        //Log.d("RotationGestureDetector", "Touch detected");
+        //stopLocationUpdates();
+        mRotationDetector.dispatchTouchEvent(event);
+        //startLocationUpdates();
+        return super.dispatchTouchEvent(event);
+    }
+    @Override
+    public void OnRotation(RotationGestureDetector rotationDetector) {
+        Log.d("RotationGestureDetector", "Rotating");
+        float angle = rotationDetector.getAngle();
+        angle = (float)Math.toRadians(angle);
+        angle = angle*0.1f;
+        Log.d("RotationGestureDetector", "Rotation: " + Float.toString(angle));
+        LatLng centrePoint = previouslatLng;
+        for (int i = 0; i < (points.size()-1); i++) {
+            LatLng currentPoint = points.get(i);
+            double ydiff = currentPoint.latitude - centrePoint.latitude;
+            double xdiff = currentPoint.longitude - centrePoint.longitude;
+            double r = Math.sqrt(xdiff*xdiff + ydiff*ydiff);
+            double teeta;
+            if (xdiff > 0) {
+                teeta = Math.atan(ydiff / xdiff);
+            }
+            else if (xdiff < 0)
+            {
+                teeta = Math.atan(ydiff / xdiff) + Math.PI;
+            } else if (ydiff > 0) {
+                teeta = Math.PI * 0.5;
+            }
+            else {
+                teeta = Math.PI * -0.5;
+            }
+            teeta = teeta + angle;
+            ydiff = r * Math.sin(teeta);
+            xdiff = r * Math.cos(teeta);
+            LatLng rotatedPoint = new LatLng((centrePoint.latitude + ydiff), (centrePoint.longitude + xdiff));
+            points.set(i, rotatedPoint);
+            Log.d("RotationGestureDetector", "Xdiff " + points.get(i).longitude);
+
+
+        }
+        line.setPoints(points);
     }
 
 
