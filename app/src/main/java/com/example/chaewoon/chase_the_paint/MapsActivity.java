@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Location;
@@ -67,6 +68,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     private RotationGestureDetector mRotationDetector;
 
     View vieww;
+
+    public final static String appName = "runningdrawing";
 
     CountDownTimer timeLeft;
 
@@ -363,7 +366,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     }
 
     GoogleMap.SnapshotReadyCallback callback = new GoogleMap.SnapshotReadyCallback() {
-        String appName = "runningdrawing";
+
         String imageName = "Map";
         @Override
         public void onSnapshotReady(Bitmap snapshot) {
@@ -387,7 +390,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                 Log.i("in save()", "after file");
                 FileOutputStream out = new FileOutputStream(filename);
                 Log.i("in save()", "after outputstream");
-                bmImg.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                bmImg.compress(Bitmap.CompressFormat.JPEG, 60, out);
                 out.flush();
                 out.close();
                 Log.i("in save()", "after outputstream closed");
@@ -397,12 +400,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, image);
                 Toast.makeText(getApplicationContext(),
                         "File is Saved in  " + filename, Toast.LENGTH_SHORT).show();
-
             } catch (Exception e) {
 
                 e.printStackTrace();
             }
-
+            ExitScreen();
         }
         public ContentValues getImageContent(File parent) {
 
@@ -553,11 +555,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
             stopButton.setText("Finish");
         } else {
             mMap.snapshot(callback);
-            Intent intent = new Intent(this, Muliti.class);
-            Log.d(TAG, "starting new activity");
-            startActivity(intent);
-            finish();
         }
+    }
+
+    private void ExitScreen() {
+        Intent intent = new Intent(this, Muliti.class);
+        Log.d(TAG, "starting new activity");
+        startActivity(intent);
+        finish();
     }
 
 }
