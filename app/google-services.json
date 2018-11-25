@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "915193183537",
+    "firebase_url": "https://chasethepaint.firebaseio.com",
+    "project_id": "chasethepaint",
+    "storage_bucket": "chasethepaint.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915193183537:android:bf627534011b9b90",
+        "android_client_info": {
+          "package_name": "com.example.chaewoon.chase_the_paint"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915193183537-8b7cujdhdqhfdhksdvg6ir8ojai0b2sj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chaewoon.chase_the_paint",
+            "certificate_hash": "5d9182714fcae293414cda739a1830fa597c5e75"
+          }
+        },
+        {
+          "client_id": "915193183537-bnq0eop79k0pr8gp47s8tkh87ujdk2um.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOl6QtVG7-UB_XyQ1QQ6WBFLt0i2PV3Do"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915193183537-bnq0eop79k0pr8gp47s8tkh87ujdk2um.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
