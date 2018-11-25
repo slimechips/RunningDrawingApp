@@ -3,6 +3,8 @@
     package="com.example.chaewoon.chase_the_paint">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.location.gps" />
 
@@ -48,7 +50,9 @@
 
         <activity
             android:name=".MapsActivity"
-            android:parentActivityName=".multiplay" >
+            android:parentActivityName=".multiplay"
+            android:configChanges="orientation"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.EDIT" />
             </intent-filter>

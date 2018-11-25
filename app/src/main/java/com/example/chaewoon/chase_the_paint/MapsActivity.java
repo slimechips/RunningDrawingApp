@@ -3,15 +3,22 @@ package com.example.chaewoon.chase_the_paint;
 //package com.bluebirds.avinash.uberdemo;
 
 import android.Manifest;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -25,6 +32,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -43,16 +51,24 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements LocationListener,
         OnMapReadyCallback, GoogleApiClient
-                .ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, RotationGestureDetector.OnRotationGestureListener{
+                .ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        RotationGestureDetector.OnRotationGestureListener{
     private RotationGestureDetector mRotationDetector;
 
     View vieww;
+
+    CountDownTimer timeLeft;
 
     private GoogleMap mMap;
     private final int MY_LOCATION_REQUEST_CODE = 100;
@@ -78,10 +94,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
     List<Polyline> lines = new ArrayList<Polyline>();
 
-
+    public boolean stoppedRunning = false;
+    Button stopButton;
 
     public double estimatedDistance = 0;
     TextView distancebox;
+    TextView timertext;
 
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
@@ -94,7 +112,10 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         distancebox = (TextView)findViewById(R.id.distanceField);
+        timertext = (TextView)findViewById(R.id.timertext);
+        stopButton = (Button)findViewById(R.id.stopButton);
 
         createLocationRequest();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -109,6 +130,27 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        timeLeft = new CountDownTimer(600000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timertext.setText("Time left (s): " + millisUntilFinished / 1000);
+            }
+
+            public void onFinish() {
+                stopLocationUpdates();
+                stoppedRunning = true;
+                mMap.getUiSettings().setMyLocationButtonEnabled(false);
+                try {
+                    mMap.setMyLocationEnabled(false);
+                } catch (SecurityException e) {
+                    //
+                }
+                stopButton.setText("Finish");
+            }
+        }.start();
+
 
         handler = new Handler() {
             @Override
@@ -320,6 +362,68 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         }
     }
 
+    GoogleMap.SnapshotReadyCallback callback = new GoogleMap.SnapshotReadyCallback() {
+        String appName = "runningdrawing";
+        String imageName = "Map";
+        @Override
+        public void onSnapshotReady(Bitmap snapshot) {
+
+            Bitmap bmImg = snapshot;
+            OutputStream fout = null;
+
+            String filePath = "Map.jpeg";
+
+            File filename;
+
+            try {
+                String path1 = android.os.Environment.getExternalStorageDirectory()
+                        .toString();
+                Log.i("in save()", "after mkdir");
+                File file = new File(path1 + "/" + appName);
+                if (!file.exists())
+                    file.mkdirs();
+                filename = new File(file.getAbsolutePath() + "/" + imageName
+                        + ".jpg");
+                Log.i("in save()", "after file");
+                FileOutputStream out = new FileOutputStream(filename);
+                Log.i("in save()", "after outputstream");
+                bmImg.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                out.flush();
+                out.close();
+                Log.i("in save()", "after outputstream closed");
+                //File parent = filename.getParentFile();
+                ContentValues image = getImageContent(filename);
+                Uri result = getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, image);
+                Toast.makeText(getApplicationContext(),
+                        "File is Saved in  " + filename, Toast.LENGTH_SHORT).show();
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+
+        }
+        public ContentValues getImageContent(File parent) {
+
+            ContentValues image = new ContentValues();
+            image.put(MediaStore.Images.Media.TITLE, appName);
+            image.put(MediaStore.Images.Media.DISPLAY_NAME, imageName);
+            image.put(MediaStore.Images.Media.DESCRIPTION, "App Image");
+            image.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis());
+            image.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg");
+            image.put(MediaStore.Images.Media.ORIENTATION, 0);
+            image.put(MediaStore.Images.ImageColumns.BUCKET_ID, parent.toString()
+                    .toLowerCase().hashCode());
+            image.put(MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME, parent.getName()
+                    .toLowerCase());
+            image.put(MediaStore.Images.Media.SIZE, parent.length());
+            image.put(MediaStore.Images.Media.DATA, parent.getAbsolutePath());
+            return image;
+        }
+
+    };
+
     public boolean mapShown = true;
 
     public void hideShowMap (View view) {
@@ -432,6 +536,27 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
         } else {
             Log.d(TAG, "no valid colour");
+        }
+    }
+
+    public void StopRunning(View view) {
+        if (!stoppedRunning) {
+            stopLocationUpdates();
+            timeLeft.cancel();
+            stoppedRunning = true;
+            mMap.getUiSettings().setMyLocationButtonEnabled(false);
+            try {
+                mMap.setMyLocationEnabled(false);
+            } catch (SecurityException e) {
+                //
+            }
+            stopButton.setText("Finish");
+        } else {
+            mMap.snapshot(callback);
+            Intent intent = new Intent(this, Muliti.class);
+            Log.d(TAG, "starting new activity");
+            startActivity(intent);
+            finish();
         }
     }
 
