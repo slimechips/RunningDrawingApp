@@ -22,7 +22,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +41,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".multiplay"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -64,6 +64,12 @@
                 <action android:name="android.intent.action.EDIT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ThemeActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ThemeAnimalActivity"
+            android:parentActivityName=".ThemeActivity" />
     </application>
 
 </manifest>
