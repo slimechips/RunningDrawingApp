@@ -65,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Dog"
+                    android:text="Apple"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -86,11 +86,11 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/dogicon"
+                        android:id="@+id/appleicon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/dog" />
+                        app:srcCompat="@drawable/Apple" />
                 </android.support.v7.widget.CardView>
 
             </android.support.constraint.ConstraintLayout>
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Cat"
+                    android:text="Orange"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -135,11 +135,11 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/caticon"
+                        android:id="@+id/oragneicon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/Cat" />
+                        app:srcCompat="@drawable/Orange" />
 
                 </android.support.v7.widget.CardView>
 
@@ -163,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Cow"
+                    android:text="Strawberry"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -184,11 +184,11 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/cowicon"
+                        android:id="@+id/strawberryicon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/Cow" />
+                        app:srcCompat="@drawable/Strawberry" />
 
                 </android.support.v7.widget.CardView>
 
