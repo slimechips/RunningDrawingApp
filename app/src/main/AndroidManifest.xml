@@ -70,7 +70,9 @@
         <activity
             android:name=".ThemeAnimalActivity"
             android:parentActivityName=".ThemeActivity" />
-        <activity android:name=".ThemeFruitActivity"></activity>
+        <activity android:name=".ThemeFruitActivity" />
+        <activity android:name=".HostOrJoinActivity" />
+        <activity android:name=".ThemeLoveActivity"></activity>
     </application>
 
 </manifest>

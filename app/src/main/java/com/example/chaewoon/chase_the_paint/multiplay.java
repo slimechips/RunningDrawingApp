@@ -29,9 +29,5 @@ public class multiplay extends AppCompatActivity {
 
         startActivity(intent);
     }
-    public boolean dispatchTouchEvent(MotionEvent event) {
 
-        Log.d("RotationGestureDetector", "Touch detected");
-        return super.dispatchTouchEvent(event);
-    }
 }
