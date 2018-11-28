@@ -90,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/Apple" />
+                        app:srcCompat="@drawable/apple" />
                 </android.support.v7.widget.CardView>
 
             </android.support.constraint.ConstraintLayout>
@@ -139,7 +139,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/Orange" />
+                        app:srcCompat="@drawable/orange" />
 
                 </android.support.v7.widget.CardView>
 
@@ -188,7 +188,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/Strawberry" />
+                        app:srcCompat="@drawable/strawberry" />
 
                 </android.support.v7.widget.CardView>
 

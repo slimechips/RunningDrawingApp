@@ -139,7 +139,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/Cat" />
+                        app:srcCompat="@drawable/cat" />
 
                 </android.support.v7.widget.CardView>
 
@@ -188,7 +188,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/Cow" />
+                        app:srcCompat="@drawable/cow" />
 
                 </android.support.v7.widget.CardView>
 
