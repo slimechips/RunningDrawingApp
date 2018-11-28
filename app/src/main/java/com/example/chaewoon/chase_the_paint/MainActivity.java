@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void multiClicked(View v) {
 
-        Intent intent = new Intent(this,multiplay.class);
+        Intent intent = new Intent(this, HostOrJoinActivity.class);
 
         startActivity(intent);
     }

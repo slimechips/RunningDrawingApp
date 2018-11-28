@@ -18,6 +18,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -26,7 +27,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,6 +39,21 @@
         <activity
             android:name=".Muliti"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".HostOrJoinActivity"
+            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".ThemeActivity"
+            android:parentActivityName=".HostOrJoinActivity" />
+        <activity
+            android:name=".ThemeAnimalActivity"
+            android:parentActivityName=".ThemeActivity" />
+        <activity
+            android:name=".ThemeFruitActivity"
+            android:parentActivityName=".ThemeActivity"/>
+        <activity
+            android:name=".ThemeLoveActivity"
+            android:parentActivityName=".ThemeActivity"/>
         <activity
             android:name=".multiplay"
             android:parentActivityName=".MainActivity" />
@@ -64,15 +79,6 @@
                 <action android:name="android.intent.action.EDIT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ThemeActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".ThemeAnimalActivity"
-            android:parentActivityName=".ThemeActivity" />
-        <activity android:name=".ThemeFruitActivity" />
-        <activity android:name=".HostOrJoinActivity" />
-        <activity android:name=".ThemeLoveActivity"></activity>
     </application>
 
 </manifest>

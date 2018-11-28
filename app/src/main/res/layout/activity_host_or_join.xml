@@ -46,19 +46,24 @@
         </RelativeLayout>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/animalsbutton"
+            android:id="@+id/hostbutton"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"
+            android:onClick="changeHostOrJoinScreen"
             app:cardBackgroundColor="?android:attr/colorButtonNormal"
             app:cardCornerRadius="30dp" >
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp">
+                android:layout_marginTop="8dp"
+                android:clickable="false"
+                android:focusable="false">
 
                 <TextView
+                    android:clickable="false"
+                    android:focusable="false"
                     android:id="@+id/theme1text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,6 +76,8 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <android.support.v7.widget.CardView
+                    android:clickable="false"
+                    android:focusable="false"
                     android:layout_width="361dp"
                     android:layout_height="185dp"
                     android:layout_marginStart="8dp"
@@ -84,11 +91,13 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
+                        android:clickable="false"
+                        android:focusable="false"
                         android:id="@+id/animalsicon"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/animals" />
+                        app:srcCompat="@drawable/host" />
                 </android.support.v7.widget.CardView>
 
             </android.support.constraint.ConstraintLayout>
@@ -99,16 +108,20 @@
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"
-            android:id="@+id/fruitsbutton"
+            android:id="@+id/joinbutton"
             app:cardBackgroundColor="?android:attr/colorButtonNormal"
             app:cardCornerRadius="30dp">
 
             <android.support.constraint.ConstraintLayout
+                android:clickable="false"
+                android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp">
 
                 <TextView
+                    android:clickable="false"
+                    android:focusable="false"
                     android:id="@+id/theme2text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -121,6 +134,8 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <android.support.v7.widget.CardView
+                    android:clickable="false"
+                    android:focusable="false"
                     android:layout_width="361dp"
                     android:layout_height="185dp"
                     android:layout_marginStart="8dp"
@@ -135,10 +150,12 @@
 
                     <ImageView
                         android:id="@+id/fruitsicon"
+                        android:clickable="false"
+                        android:focusable="false"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        app:srcCompat="@drawable/fruits" />
+                        app:srcCompat="@drawable/join" />
 
                 </android.support.v7.widget.CardView>
 
