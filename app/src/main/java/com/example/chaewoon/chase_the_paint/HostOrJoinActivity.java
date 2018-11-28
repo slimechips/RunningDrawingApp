@@ -1,7 +1,9 @@
 package com.example.chaewoon.chase_the_paint;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.nfc.Tag;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -31,6 +33,10 @@ public class HostOrJoinActivity extends AppCompatActivity {
         String activityName = getResources().getResourceName(id);
         Class activityPage = activities.get(activityName);
         Intent intent = new Intent(this, activityPage);
-        startActivity(intent);
+        startActivityForResult(intent, 0);
+    }
+
+    public void finishFromChild(Activity activityPage) {
+        finish();
     }
 }
