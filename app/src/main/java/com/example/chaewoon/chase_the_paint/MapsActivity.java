@@ -322,7 +322,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                     + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                     * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
             double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            double distance = R * c * 1000; // convert to meters
+            double distance = R * c * 200; // convert to meters
 
             distance = Math.pow(distance, 2);
             estimatedDistance += distance;
