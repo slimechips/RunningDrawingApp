@@ -30,16 +30,38 @@ public class MainActivity extends AppCompatActivity {
     public static String playerEmail;
     public static Uri photoUrl;
     public TextView signInText;
+    public Button signInOutButton;
+    List<AuthUI.IdpConfig> providers;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        List<AuthUI.IdpConfig> providers = Arrays.asList(
+        providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build());
         signInText = (TextView)findViewById(R.id.sign_in_text);
+        signInOutButton = (Button)findViewById(R.id.sign_out_button);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        signInOutButton = (Button)findViewById(R.id.sign_out_button);
+        signInOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    signOut();
+                }
+                else {
+                    signIn();
+                }
+                            }
+                        });
+        signIn();
+        //new UpdateSignInText().execute(playerName);
+
+    }
+
+    public void signIn() {
         if (user != null) {
             // User is signed in
             // Name, email address, and profile photo Url
@@ -54,9 +76,12 @@ public class MainActivity extends AppCompatActivity {
             // authenticate with your backend server, if you have one. Use
             // FirebaseUser.getIdToken() instead.
             String uid = user.getUid();
-
+            signInOutButton.setText("Sign out");
+            signInText.setText("Welcome " + playerName);
         } else {
             //user not signed in
+            signInText.setText("Not signed in!");
+            signInOutButton.setText("Sign in");
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
@@ -64,16 +89,6 @@ public class MainActivity extends AppCompatActivity {
                             .build(),
                     RC_SIGN_IN);
         }
-
-        Button signOutButton = (Button)findViewById(R.id.sign_out_button);
-        signOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signOut();
-                            }
-                        });
-
-        //new UpdateSignInText().execute(playerName);
 
     }
 
@@ -100,8 +115,9 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                // ...
+                user = FirebaseAuth.getInstance().getCurrentUser();
+                signInOutButton.setText("Sign out");
+                signInText.setText("Welcome " + playerName);
             } else {
                 Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();
             }
@@ -115,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+                        signInText.setText("Not signed in!");
+                        signInOutButton.setText("Sign in");
                     }
                 });
         // [END auth_fui_signout]
