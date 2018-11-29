@@ -27,3 +27,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 }
+
+//TODO Social Media function, Logins, Actual Multiplayer Functionality (Host Game, Join Game,
+//TODO Vote function), Points system, better main menu ui, colours selected can be  seen
+//TODO App permissions, Firebase
+//TODO change yellow colour, proper character screen
