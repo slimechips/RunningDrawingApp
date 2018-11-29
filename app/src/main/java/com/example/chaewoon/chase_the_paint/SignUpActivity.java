@@ -24,17 +24,24 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = "SignUpActivity";
 
-    EditText _nameText = (EditText)findViewById(R.id.input_name);
-    EditText _emailText = (EditText)findViewById(R.id.input_email);
-    EditText _passwordText = (EditText)findViewById(R.id.input_password);
-    Button _signupButton = (Button)findViewById(R.id.btn_signup);
-    TextView _loginLink = (TextView)findViewById(R.id.link_login);
+    private EditText _nameText;
+    private EditText _emailText;
+    private EditText _passwordText;
+    private Button _signupButton;
+    private TextView _loginLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
+
+        _nameText = (EditText)findViewById(R.id.input_name);
+        _emailText = (EditText)findViewById(R.id.input_email);
+        _passwordText = (EditText)findViewById(R.id.input_password);
+        _signupButton = (Button)findViewById(R.id.btn_signup);
+        _loginLink = (TextView)findViewById(R.id.link_login);
+
     }
 
 
