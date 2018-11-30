@@ -116,8 +116,13 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 user = FirebaseAuth.getInstance().getCurrentUser();
+                playerName = user.getDisplayName();
+                playerEmail = user.getEmail();
+                photoUrl = user.getPhotoUrl();
                 signInOutButton.setText("Sign out");
                 signInText.setText("Welcome " + playerName);
+                Toast.makeText(getApplicationContext(), "Sign in successful", Toast.LENGTH_SHORT).show();
+
             } else {
                 Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();
             }
@@ -154,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-//TODO Social Media function, Logins, Actual Multiplayer Functionality (Host Game, Join Game,
+//TODO Social Media function, Actual Multiplayer Functionality (Host Game, Join Game,
 //TODO Vote function), Points system, better main menu ui, colours selected can be  seen
 //TODO App permissions, Firebase
 //TODO change yellow colour, proper character screen
