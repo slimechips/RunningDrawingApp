@@ -80,7 +80,8 @@
                 <action android:name="android.intent.action.EDIT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".FriendActivity"></activity>
     </application>
 
 </manifest>

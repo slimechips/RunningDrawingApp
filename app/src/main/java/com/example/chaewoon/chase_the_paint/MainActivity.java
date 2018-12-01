@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,8 +16,11 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.w3c.dom.Text;
 
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 123;
     public static String playerName;
     public static String playerEmail;
+    public static String uid;
     public static Uri photoUrl;
     public TextView signInText;
     public Button signInOutButton;
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     signIn();
+
                 }
                             }
                         });
@@ -63,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void signIn() {
         if (user != null) {
-            // User is signed in
+            // com.example.chaewoon.chase_the_paint.User is signed in
             // Name, email address, and profile photo Url
             playerName = user.getDisplayName();
             playerEmail = user.getEmail();
@@ -119,9 +125,26 @@ public class MainActivity extends AppCompatActivity {
                 playerName = user.getDisplayName();
                 playerEmail = user.getEmail();
                 photoUrl = user.getPhotoUrl();
+                uid = user.getUid();
+                addNewUserToDatabase(playerName, playerEmail, uid);
+/*
+                OnCompleteListener<AuthResult> completeListener = new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            boolean isNew = task.getResult().getAdditionalUserInfo().isNewUser();
+                            if (isNew) {
+                                addNewUserToDatabase(playerName, playerEmail, uid);
+                            }
+                            Log.d("MyTAG", "onComplete: " + (isNew ? "new user" : "old user"));
+                        }
+                    }
+                };
+*/
                 signInOutButton.setText("Sign out");
                 signInText.setText("Welcome " + playerName);
                 Toast.makeText(getApplicationContext(), "Sign in successful", Toast.LENGTH_SHORT).show();
+
 
             } else {
                 Toast.makeText(getApplicationContext(), "Sign in failed", Toast.LENGTH_SHORT).show();
@@ -143,7 +166,15 @@ public class MainActivity extends AppCompatActivity {
         // [END auth_fui_signout]
     }
 
+    public void addNewUserToDatabase (String name, String email, String userId) {
 
+        DatabaseReference mDatabase;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        if (mDatabase.child(userId) == null) {
+            User user = new User(name, email);
+            mDatabase.child("users").child(userId).setValue(user);
+        }
+    }
 
     public void singleClicked(View v) {
 

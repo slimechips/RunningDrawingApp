@@ -26,6 +26,13 @@ public class HostOrJoinActivity extends AppCompatActivity {
         activities.put("com.example.chaewoon.chase_the_paint:id/hostbutton", ThemeActivity.class);
         //activities.put("com.example.chaewoon.chase_the_paint:id/joinbutton", JoinActivity.class);
 
+        CardView addFriendButton = (CardView)findViewById(R.id.addfriendbutton);
+        addFriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToAddFriendActivity(v);
+            }
+        });
     }
 
     public void changeHostOrJoinScreen(View v) {
@@ -38,5 +45,10 @@ public class HostOrJoinActivity extends AppCompatActivity {
 
     public void finishFromChild(Activity activityPage) {
         finish();
+    }
+
+    public void goToAddFriendActivity (View v) {
+        Intent intent = new Intent(this, FriendActivity.class);
+        startActivity(intent);
     }
 }

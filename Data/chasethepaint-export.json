@@ -1,0 +1,26 @@
+{
+  "users" : {
+    "0JcTezQhvaQZ8Hf7bybfcFwV9a72" : {
+      "email" : "two_type@hotmail.com",
+      "friends" : {
+        "y2sAdZutFPclwvQmte2Fngbc65k2" : true
+      },
+      "name" : "Two Typee"
+    },
+    "etumDcz4dTNdczPNTBiuUi6f6ib2" : {
+      "email" : "three_type@hotmail.com",
+      "friends" : {
+        "y2sAdZutFPclwvQmte2Fngbc65k2" : true
+      },
+      "name" : "Three"
+    },
+    "y2sAdZutFPclwvQmte2Fngbc65k2" : {
+      "email" : "jason.chowcs@gmail.com",
+      "friends" : {
+        "0JcTezQhvaQZ8Hf7bybfcFwV9a72" : true,
+        "etumDcz4dTNdczPNTBiuUi6f6ib2" : true
+      },
+      "name" : "Jason Chow"
+    }
+  }
+}
