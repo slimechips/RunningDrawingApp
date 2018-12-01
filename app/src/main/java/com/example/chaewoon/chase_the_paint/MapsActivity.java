@@ -1,7 +1,5 @@
 package com.example.chaewoon.chase_the_paint;
 
-//package com.bluebirds.avinash.uberdemo;
-
 import android.Manifest;
 import android.content.ContentValues;
 import android.content.Context;
@@ -28,9 +26,11 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -340,8 +340,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
 //        new ServerConnAsync(handler, MapsActivity.this,location).execute();
 
-
-
     }
 
     @Override
@@ -515,30 +513,50 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         startPoint.add(newPoint);
         String colour = view.getTag().toString();
         Log.d(TAG, "change colour " + colour);
+        int dpValuea = 15; // margin in dips
+        float d = Resources.getSystem().getDisplayMetrics().density;
+        int margina = (int)(dpValuea * d); // margin in pixels
+        ImageView selectionBox = (ImageView)findViewById(R.id.selectionBox);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams)selectionBox.getLayoutParams();
         if (Objects.equals(colour,"red")) {
             Log.d(TAG, "changing to red");
             lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.RED)));
             lines.get(lines.size()-1).setPoints(startPoint);
+            int dpValue = 30; // margin in dips
+            int margin = (int)(dpValue * d); // margin in pixels
+            params.setMargins(margina, margin, 0, 0);
         } else
         if (Objects.equals(colour,"green")) {
             Log.d(TAG, "changing to green");
             lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.GREEN)));
             lines.get(lines.size()-1).setPoints(startPoint);
+            int dpValue = 75; // margin in dips
+            int margin = (int)(dpValue * d); // margin in pixels
+            params.setMargins(margina, margin, 0, 0);
         } else
         if (Objects.equals(colour,"blue")) {
             Log.d(TAG, "changing to blue");
             lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.BLUE)));
             lines.get(lines.size()-1).setPoints(startPoint);
+            int dpValue = 120; // margin in dips
+            int margin = (int)(dpValue * d); // margin in pixels
+            params.setMargins(margina, margin, 0, 0);
 
         } else
         if (Objects.equals(colour,"yellow")) {
             Log.d(TAG, "changing to yellow");
-            lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.YELLOW)));
+            lines.add(mMap.addPolyline(new PolylineOptions().width(5).color(Color.rgb(242, 210, 52))));
             lines.get(lines.size()-1).setPoints(startPoint);
+            int dpValue = 165; // margin in dips
+            int margin = (int)(dpValue * d); // margin in pixels
+            params.setMargins(margina, margin, 0, 0);
 
         } else {
             Log.d(TAG, "no valid colour");
+            params.setMargins(margina, 30, 0, 0);
         }
+
+        selectionBox.setLayoutParams(params);
     }
 
     public void StopRunning(View view) {

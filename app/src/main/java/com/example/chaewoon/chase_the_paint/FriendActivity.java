@@ -26,7 +26,7 @@ import java.util.Objects;
 
 public class FriendActivity extends AppCompatActivity {
 
-    private final String TAG = "FriendActivity";
+    private static final String TAG = "FriendActivity";
     public DatabaseReference mDatabase;
     public boolean validEmail;
 

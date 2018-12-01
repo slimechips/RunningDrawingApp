@@ -20,18 +20,4 @@ public class User {
         this.email = email;
     }
 
-/*
-    public User(String name, String email, String friendId) {
-
-        this.name = name;
-        this.email = email;
-    }
-
-    public User(String name, String email, List<String> friends, String gameSession) {
-
-        this.name = name;
-        this.email = email;
-        this.friends = friends;
-        this.gameSession = gameSession;
-    }*/
 }

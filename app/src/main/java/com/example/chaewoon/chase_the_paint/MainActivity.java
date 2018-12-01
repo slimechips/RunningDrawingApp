@@ -178,19 +178,27 @@ public class MainActivity extends AppCompatActivity {
 
     public void singleClicked(View v) {
 
-        Intent intent = new Intent(this, Singleplay.class);
-
-        startActivity(intent);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Intent intent = new Intent(this, Singleplay.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "please sign in first", Toast.LENGTH_SHORT).show();
+        }
     }
     public void multiClicked(View v) {
 
-        Intent intent = new Intent(this, HostOrJoinActivity.class);
-
-        startActivity(intent);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            Intent intent = new Intent(this, HostOrJoinActivity.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "please sign in first", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
 //TODO Social Media function, Actual Multiplayer Functionality (Host Game, Join Game,
-//TODO Vote function), Points system, better main menu ui, colours selected can be  seen
-//TODO App permissions, Firebase
-//TODO change yellow colour, proper character screen
+//TODO Vote function), Points system, better main menu ui
+//TODO App permissions
+//TODO , proper character screen
