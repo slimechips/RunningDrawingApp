@@ -34,7 +34,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose a Theme"
+            android:text="Choose an Animal"
             android:textAlignment="center"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="30sp" />
@@ -50,10 +50,10 @@
         </RelativeLayout>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/dogCard"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"
-            android:onClick="goToHostScreen"
             app:cardBackgroundColor="?android:attr/colorButtonNormal"
             app:cardCornerRadius="30dp">
 
@@ -107,10 +107,10 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/catCard"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"
-
             app:cardBackgroundColor="?android:attr/colorButtonNormal"
             app:cardCornerRadius="30dp">
 
@@ -169,6 +169,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/cowCard"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -168,12 +169,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void addNewUserToDatabase (String name, String email, String userId) {
 
+        Log.d("Tag", "user added");
         DatabaseReference mDatabase;
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        if (mDatabase.child(userId) == null) {
-            User user = new User(name, email);
-            mDatabase.child("users").child(userId).setValue(user);
-        }
+        User user = new User(name, email);
+        mDatabase.child("users").child(userId).child("name").setValue(user.name);
+        mDatabase.child("users").child(userId).child("email").setValue(user.email);
     }
 
     public void singleClicked(View v) {

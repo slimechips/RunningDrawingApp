@@ -1,4 +1,7 @@
 {
+  "game_sessions" : {
+    "-LShZIqSIep8flWts9hP" : "dog"
+  },
   "users" : {
     "0JcTezQhvaQZ8Hf7bybfcFwV9a72" : {
       "email" : "two_type@hotmail.com",
@@ -14,11 +17,23 @@
       },
       "name" : "Three"
     },
+    "wUEatLLILcUoESsINdRLmPEUVcL2" : {
+      "email" : "five@gmail.com",
+      "friends" : {
+        "y2sAdZutFPclwvQmte2Fngbc65k2" : true
+      },
+      "name" : "five"
+    },
     "y2sAdZutFPclwvQmte2Fngbc65k2" : {
       "email" : "jason.chowcs@gmail.com",
       "friends" : {
         "0JcTezQhvaQZ8Hf7bybfcFwV9a72" : true,
-        "etumDcz4dTNdczPNTBiuUi6f6ib2" : true
+        "6rSlEhTozufTwTpyH5Zverh9zXr2" : true,
+        "etumDcz4dTNdczPNTBiuUi6f6ib2" : true,
+        "wUEatLLILcUoESsINdRLmPEUVcL2" : true
+      },
+      "game_sessions" : {
+        "-LShZIqSIep8flWts9hP" : "dog"
       },
       "name" : "Jason Chow"
     }

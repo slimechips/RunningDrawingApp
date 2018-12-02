@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dog">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/dog
+    </string>
+
+    <string name="cat">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/cat
+    </string>
+
+    <string name="cow">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/cow
+    </string>
+
+    <string name="apple">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/apple
+    </string>
+
+    <string name="orange">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/orange
+    </string>
+
+    <string name="strawberry">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/strawberry
+    </string>
+
+    <string name="heart">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/heart
+    </string>
+
+    <string name="ring">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/ring
+    </string>
+
+    <string name="rose">
+        android.resource://com.example.chaewoon.chase_the_paint/drawable/rose
+    </string>
+
+</resources>

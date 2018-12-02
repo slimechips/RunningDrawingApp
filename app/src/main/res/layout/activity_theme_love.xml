@@ -50,6 +50,7 @@
         </RelativeLayout>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/heartCard"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"
@@ -100,6 +101,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/ringCard"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"
@@ -152,6 +154,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/roseCard"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:layout_marginBottom="20dp"

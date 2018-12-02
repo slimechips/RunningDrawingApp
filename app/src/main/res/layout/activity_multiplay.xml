@@ -8,16 +8,15 @@
     android:background="@color/orange">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-
-        >
+        android:layout_marginHorizontal="16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Theme"
+            android:text="Object to Draw"
             android:textColor="#6f6f6f"
             android:textSize="17dp"
             android:id="@+id/theme"
@@ -26,17 +25,19 @@
             />
 
         <TextView
+            android:id="@+id/drawingName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
-            android:text="Dog"
+            android:text=""
             android:textColor="#6f6f6f"
             android:textSize="40dp" />
 
         <ImageView
+            android:id="@+id/drawingImage"
             android:layout_marginTop="20dp"
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="300dp"
             android:src="@drawable/expaint"
             android:background="@color/white"
