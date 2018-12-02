@@ -1,6 +1,42 @@
 {
   "game_sessions" : {
-    "-LShZIqSIep8flWts9hP" : "dog"
+    "-LSjmTEJKQcCwGqiTyrO" : {
+      "drawingObject" : "heart",
+      "player_a" : {
+        "distanceScore" : 0,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerName" : "Jason Chow"
+      },
+      "session_id" : "-LSjmTEJKQcCwGqiTyrO"
+    },
+    "-LSjw7JsKxGIAZrq2WpJ" : {
+      "drawingObject" : "cat",
+      "player_a" : {
+        "distanceScore" : 0,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerName" : "Jason Chow"
+      },
+      "session_id" : "-LSjw7JsKxGIAZrq2WpJ"
+    },
+    "-LSk1Xu6tFiPdiMc3ZUo" : {
+      "drawingObject" : "dog",
+      "player_a" : {
+        "distanceScore" : 0,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerName" : "Jason Chow"
+      },
+      "player_b" : {
+        "distanceScore" : 0,
+        "playerId" : "etumDcz4dTNdczPNTBiuUi6f6ib2",
+        "playerName" : "Three"
+      },
+      "player_c" : {
+        "distanceScore" : 0,
+        "playerId" : "test",
+        "playerName" : "four"
+      },
+      "session_id" : "-LSk1Xu6tFiPdiMc3ZUo"
+    }
   },
   "users" : {
     "0JcTezQhvaQZ8Hf7bybfcFwV9a72" : {
@@ -33,7 +69,15 @@
         "wUEatLLILcUoESsINdRLmPEUVcL2" : true
       },
       "game_sessions" : {
-        "-LShZIqSIep8flWts9hP" : "dog"
+        "-LSjmTEJKQcCwGqiTyrO" : "heart",
+        "-LSjw7JsKxGIAZrq2WpJ" : "cat",
+        "-LSjwYry2lhQcyabeq1S" : "cow",
+        "-LSjzivDxd902r-5ioEO" : "cow",
+        "-LSk-8ndhkQpQESXIwR9" : "cat",
+        "-LSk-NpfBVHsUpuEnBoS" : "dog",
+        "-LSk0ognyuyQHLoNl-4f" : "dog",
+        "-LSk19iCAvIPo0x2sk82" : "dog",
+        "-LSk1Xu6tFiPdiMc3ZUo" : "dog"
       },
       "name" : "Jason Chow"
     }

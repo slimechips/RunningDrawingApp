@@ -15,4 +15,11 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+    <string name="title_multiplay">Objects to draw</string>
+    <string name="title_host"><u>Host</u></string>
+    <string name="btn_text_draw">Draw</string>
+    <string name="btn_text_vote">Vote</string>
+    <string name="title_players"><u>Players</u></string>
+
 </resources>
