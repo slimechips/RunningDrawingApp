@@ -40,17 +40,11 @@ public class multiplay extends AppCompatActivity {
         drawingName = (TextView)findViewById(R.id.drawingName);
         drawingImage = (ImageView)findViewById(R.id.drawingImage);
 
-        String _objectName = getIntent().getStringExtra("Drawing Object");
-        final String _sessionKey = getIntent().getStringExtra("Session Id");
+        String objectName = getIntent().getStringExtra("Drawing Object");
+        final String sessionKey = getIntent().getStringExtra("Session Id");
 
-        String _objectImageReference = (String)getResources().getText(getResources()
-                .getIdentifier(_objectName, "string", getPackageName()));
-
-        _objectName = _objectName.substring(0, 1).toUpperCase() + _objectName.substring(1);
-        drawingName.setText(_objectName);
-        drawingImage.setImageURI(Uri.parse(_objectImageReference));
-
-        setHostName(_sessionKey);
+        setImage(drawingName, drawingImage, objectName);
+        setHostName(sessionKey);
     }
 
     public void voteclick (View view){
@@ -64,8 +58,29 @@ public class multiplay extends AppCompatActivity {
     public void drawMulti (View view){
 
         Intent intent = new Intent(this, MapsActivity.class);
-
+        intent.putExtra("Session Id", getIntent().getStringExtra("Session Id"));
         startActivity(intent);
+    }
+
+    public void setImage(TextView drawingName, ImageView drawingImage, String objectName) {
+
+        try {
+            objectName = objectName.substring(0, 1).toUpperCase() + objectName.substring(1);
+        } catch (Exception e) {
+            objectName = new String ("Dog");
+        }
+
+        String _objectImageReference;
+
+        try {
+            _objectImageReference = (String)getResources().getText(getResources()
+                    .getIdentifier(objectName, "string", getPackageName()));
+        } catch (Exception e) {
+            _objectImageReference = new String("android.resource://com.example.chaewoon.chase_the_paint/drawable/dog");
+        }
+        drawingName.setText(objectName);
+        drawingImage.setImageURI(Uri.parse(_objectImageReference));
+
     }
 
     public String hostName;
@@ -85,7 +100,6 @@ public class multiplay extends AppCompatActivity {
                     if(Objects.equals(postSnapshot.getKey(), "player_a")) {
                         hostName = postSnapshot.child("playerName").getValue().toString();
                         hostNameView.setText(hostName);
-                        Log.d(TAG + "onDatachange", hostName);
                         break;
                     }
                 }
@@ -115,14 +129,14 @@ public class multiplay extends AppCompatActivity {
         sessionRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.d(TAG, "onChildAdded: " + dataSnapshot.child("playerName").getValue());
-                for(TextView currentView : playerNameViews) {
-                    @Nullable String currentViewText = currentView.getText().toString();
-                    Log.d(TAG, "testa" + currentViewText);
-                    if(Objects.equals("", currentViewText)) {
-                        Log.d(TAG, "null");
-                        currentView.setText(dataSnapshot.child("playerName").getValue(String.class));
-                        break;
+                if(!Objects.equals(dataSnapshot.getKey(), "player_a")) {
+                    for (TextView currentView : playerNameViews) {
+                        @Nullable String currentViewText = currentView.getText().toString();
+                        if (Objects.equals("", currentViewText)) {
+                            Log.d(TAG, "null");
+                            currentView.setText(dataSnapshot.child("playerName").getValue(String.class));
+                            break;
+                        }
                     }
                 }
             }

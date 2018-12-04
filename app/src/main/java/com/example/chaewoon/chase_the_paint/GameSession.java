@@ -1,7 +1,9 @@
 package com.example.chaewoon.chase_the_paint;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +17,7 @@ public class GameSession {
     public Player playerFour;
     public Player playerFive;
     public Boolean sessionEnded;
-    public Integer playerCount;
+    public int playerCount;
 
     public GameSession(){};
 
@@ -44,26 +46,31 @@ public class GameSession {
         this.playerFour = playerFour;
         this.playerFive = playerFive;
         this.sessionEnded = sessionEnded;
+        this.playerCount = 5;
     }
     //convert from json file
     public GameSession(DataSnapshot dataSnapshot) {
-        this.sessionId = (String)dataSnapshot.child("sessionid").getValue();
+        this.sessionId = (String)dataSnapshot.child("session_id").getValue();
         this.drawingObject = (String)dataSnapshot.child("drawingObject").getValue();
-        this.playerOne = (Player)dataSnapshot.child("player_a").getValue();
-        this.playerTwo = (Player)dataSnapshot.child("player_b").getValue();
-        this.playerThree = (Player)dataSnapshot.child("player_c").getValue();
-        this.playerFour = (Player)dataSnapshot.child("player_d").getValue();
-        this.playerFive = (Player)dataSnapshot.child("player_e").getValue();
-        this.playerCount = (Integer)dataSnapshot.child("player_count").getValue();
+        this.playerOne = Player.ConvertToPlayer(dataSnapshot.child("player_a").getValue());
+        this.playerTwo = Player.ConvertToPlayer(dataSnapshot.child("player_b").getValue());
+        this.playerThree = Player.ConvertToPlayer(dataSnapshot.child("player_c").getValue());
+        this.playerFour = Player.ConvertToPlayer(dataSnapshot.child("player_d").getValue());
+        this.playerFive = Player.ConvertToPlayer(dataSnapshot.child("player_e").getValue());
+        this.playerCount = ((Long)dataSnapshot.child("player_count").getValue()).intValue();
         this.sessionEnded = (Boolean)dataSnapshot.child("session_ended").getValue();
     }
 
     public final void addPlayer (Player player) {
-        if (this.playerTwo == null) {this.playerFive = player;}
+        if (this.playerTwo == null) {this.playerTwo = player;}
         else if (this.playerThree == null) {this.playerThree = player;}
         else if (this.playerFour == null) {this.playerFour = player;}
         else if (this.playerFive == null) {this.playerFive = player;}
-        playerCount++;
+        this.playerCount++;
+
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference gameSessionRef = mDatabase.child("game_sessions").child(this.sessionId);
+        gameSessionRef.updateChildren(this.toMap());
     }
 
     @Exclude

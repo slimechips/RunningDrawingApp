@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -191,9 +192,15 @@ public class FindGameActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     GameSession currentSession = new GameSession(dataSnapshot);
-                    Player currentUser = new Player(userId, userName, 0);
-                    currentSession.addPlayer(currentUser);
-
+                    if (!Objects.equals(userId, dataSnapshot.child("player_a").child("playerId"))
+                            &&!Objects.equals(userId, dataSnapshot.child("player_b").child("playerId").getValue())
+                            &&!Objects.equals(userId, dataSnapshot.child("player_c").child("playerId").getValue())
+                            &&!Objects.equals(userId, dataSnapshot.child("player_d").child("playerId").getValue())
+                            &&!Objects.equals(userId, dataSnapshot.child("player_e").child("playerId").getValue())) {
+                        Player currentUser = new Player(userId, userName, 0.0);
+                        currentSession.addPlayer(currentUser);
+                    }
+                    goToMultiplayActivity(currentSession);
                 }
 
                 @Override
@@ -201,13 +208,17 @@ public class FindGameActivity extends AppCompatActivity {
 
                 }
             });
+        } else {
+            Toast.makeText(this, "Invalid Game Session", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void goToMultiplayActivity() {
+    public void goToMultiplayActivity(GameSession currentSession) {
 
         Intent intent = new Intent(this, multiplay.class);
+        intent.putExtra("Drawing Object", currentSession.drawingObject);
+        intent.putExtra("Session Id", currentSession.sessionId);
         startActivity(intent);
-
+        finish();
     }
 }

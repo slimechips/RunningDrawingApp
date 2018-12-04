@@ -17,6 +17,7 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -51,11 +52,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -299,6 +311,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
             previouslatLng = newPoint;
         }
         newPoint = new LatLng(location.getLatitude(), location.getLongitude());
+        Log.d(TAG, "Inaccuracy: " + Float.toString(location.getAccuracy()));
         points = lines.get(lines.size()-1).getPoints();
         points.add(newPoint);
         lines.get(lines.size()-1).setPoints(points);
@@ -322,9 +335,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                     + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
                     * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
             double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            double distance = R * c * 200; // convert to meters
+            double distance = R * c * 1000; // convert to meters
 
-            distance = Math.pow(distance, 2);
+            //distance = Math.pow(distance, 2);
             estimatedDistance += distance;
             distancebox.setText("Distance(m): " + String.format("%.02f", estimatedDistance));
             Log.d(TAG, "distance :" + estimatedDistance);
@@ -398,11 +411,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, image);
                 Toast.makeText(getApplicationContext(),
                         "File is Saved in  " + filename, Toast.LENGTH_SHORT).show();
+                uploadFile(estimatedDistance, filename);
             } catch (Exception e) {
 
                 e.printStackTrace();
             }
-            ExitScreen();
         }
         public ContentValues getImageContent(File parent) {
 
@@ -492,6 +505,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                     teeta = Math.atan(ydiff / xdiff);
                 } else if (xdiff < 0) {
                     teeta = Math.atan(ydiff / xdiff) + Math.PI;
+                    //if xdiff = 0
                 } else if (ydiff > 0) {
                     teeta = Math.PI * 0.5;
                 } else {
@@ -576,9 +590,50 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         }
     }
 
+    public void uploadFile (final Double distanceScore, File filename) {
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        final StorageReference thisImageRef = storageRef.child("images/" + user.getUid() + "/"
+                + getIntent().getStringExtra("Session Id") + ".jpg");
+        try {
+            InputStream stream = new FileInputStream(filename);
+
+            UploadTask uploadTask = thisImageRef.putStream(stream);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(getApplicationContext(), "upload failed", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(getApplicationContext(), "upload success", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "uploadtest1");
+                    uploadResult(distanceScore, thisImageRef);
+                    Log.d(TAG, "uploadtest3");
+
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "file not found", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void uploadResult(Double distanceScore, StorageReference thisImageRef) {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference sessionRef = mDatabase.child(getIntent().getStringExtra("Session Id"));
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Player player = new Player(user.getUid(), user.getDisplayName(), distanceScore, thisImageRef);
+        Log.d(TAG, "uploadtest1");
+        //sessionRef.updateChildren(player.toMap());
+        //ExitScreen();
+    }
+
     private void ExitScreen() {
         Intent intent = new Intent(this, Muliti.class);
-        Log.d(TAG, "starting new activity");
+        intent.putExtra("Session Id", getIntent().getStringExtra("Session Id"));
         startActivity(intent);
         finish();
     }
