@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="?android:attr/colorButtonNormal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        style="@style/join_game_card" >
+
+        <RelativeLayout
+            android:clickable="false"
+            android:focusable="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:tag="@string/text_host"
+                android:clickable="false"
+                android:focusable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Host:"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="@dimen/margin_left_text_card_small"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:tag="@string/text_drawing"
+                android:clickable="false"
+                android:focusable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Drawing: "
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginLeft="@dimen/margin_left_text_card_small"
+                android:layout_marginTop="35dp"/>
+
+
+            <TextView
+                android:tag="@string/text_players"
+                android:clickable="false"
+                android:focusable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Players:"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="65dp"
+                android:layout_marginLeft="@dimen/margin_left_text_card_small"/>
+
+
+            <ImageView
+                android:tag="@string/image_drawing_join_small"
+                android:clickable="false"
+                android:focusable="false"
+                android:id="@+id/animalsicon"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_marginLeft="5dp"
+                app:srcCompat="@drawable/animals" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView></LinearLayout>

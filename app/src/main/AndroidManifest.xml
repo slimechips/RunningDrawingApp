@@ -81,7 +81,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".FriendActivity"></activity>
+        <activity android:name=".FriendActivity" />
+        <activity android:name=".FindGameActivity"></activity>
     </application>
 
 </manifest>

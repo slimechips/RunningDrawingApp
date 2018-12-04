@@ -66,12 +66,13 @@ public class ThemeLoveActivity extends AppCompatActivity {
 
         mDatabase.updateChildren(childUpdates);
 
-        goToHostScreen(drawingObject);
+        goToHostScreen(drawingObject, sessionKey);
     }
 
-    public void goToHostScreen(String drawingObject) {
+    public void goToHostScreen(String drawingObject, String sessionKey) {
         Intent intent = new Intent(this, multiplay.class);
         intent.putExtra("Drawing Object", drawingObject);
+        intent.putExtra("Session Id", sessionKey);
         startActivity(intent);
         finish();
     }

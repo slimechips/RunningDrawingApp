@@ -33,6 +33,14 @@ public class HostOrJoinActivity extends AppCompatActivity {
                 goToAddFriendActivity(v);
             }
         });
+
+        CardView joinButton = (CardView)findViewById(R.id.joinbutton);
+        joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToFindGameActivity();
+            }
+        });
     }
 
     public void changeHostOrJoinScreen(View v) {
@@ -49,6 +57,11 @@ public class HostOrJoinActivity extends AppCompatActivity {
 
     public void goToAddFriendActivity (View v) {
         Intent intent = new Intent(this, FriendActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToFindGameActivity () {
+        Intent intent = new Intent(this, FindGameActivity.class);
         startActivity(intent);
     }
 }

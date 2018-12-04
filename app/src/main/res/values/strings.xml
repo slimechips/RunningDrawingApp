@@ -22,4 +22,10 @@
     <string name="btn_text_vote">Vote</string>
     <string name="title_players"><u>Players</u></string>
 
+    <string name="title_find_game">Join a Game</string>
+    <string name="text_host">text_host</string>
+    <string name="text_drawing">text_drawing</string>
+    <string name="text_players">text_players</string>
+    <string name="image_drawing_join_small">image_drawing_join_small</string>
+
 </resources>
