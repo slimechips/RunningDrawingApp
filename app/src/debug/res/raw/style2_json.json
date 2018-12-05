@@ -8,6 +8,14 @@
     ]
   },
   {
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
     "elementType": "labels",
     "stylers": [
       {

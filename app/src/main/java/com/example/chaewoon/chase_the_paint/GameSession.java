@@ -61,16 +61,18 @@ public class GameSession {
         this.sessionEnded = (Boolean)dataSnapshot.child("session_ended").getValue();
     }
 
-    public final void addPlayer (Player player) {
-        if (this.playerTwo == null) {this.playerTwo = player;}
-        else if (this.playerThree == null) {this.playerThree = player;}
-        else if (this.playerFour == null) {this.playerFour = player;}
-        else if (this.playerFive == null) {this.playerFive = player;}
+    public final String addPlayer (Player player) {
+        String playerLetter = "player_a";
+        if (this.playerTwo == null) {this.playerTwo = player; playerLetter = "player_b";}
+        else if (this.playerThree == null) {this.playerThree = player; playerLetter = "player_c";}
+        else if (this.playerFour == null) {this.playerFour = player; playerLetter = "player_d";}
+        else if (this.playerFive == null) {this.playerFive = player; playerLetter = "player_e";}
         this.playerCount++;
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference gameSessionRef = mDatabase.child("game_sessions").child(this.sessionId);
         gameSessionRef.updateChildren(this.toMap());
+        return playerLetter;
     }
 
     @Exclude

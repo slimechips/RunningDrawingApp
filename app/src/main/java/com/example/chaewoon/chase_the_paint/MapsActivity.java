@@ -70,7 +70,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class MapsActivity extends FragmentActivity implements LocationListener,
@@ -119,10 +121,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL/2);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,6 +203,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(singapore));
         mMap.getUiSettings().setRotateGesturesEnabled(false);
+        mMap.setMaxZoomPreference(18.0f);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.getUiSettings().setZoomGesturesEnabled(false);
 
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -236,7 +240,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     }
 
 
-   /* @Override
+   @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[]
             grantResults) {
         if (requestCode == MY_LOCATION_REQUEST_CODE) {
@@ -248,7 +252,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                 // Permission was denied. Display an error message.
             }
         }
-    }*/
+    }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
@@ -339,10 +343,10 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
             //distance = Math.pow(distance, 2);
             estimatedDistance += distance;
-            distancebox.setText("Distance(m): " + String.format("%.02f", estimatedDistance));
+            distancebox.setText("Distance(m): " + String.format("%.02f", estimatedDistance) +  " Inaccuracy " + location.getAccuracy());
             Log.d(TAG, "distance :" + estimatedDistance);
         } else {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 20.0f));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14.0f));
             //mRotationDetector = new RotationGestureDetector(this);
         }
 
@@ -597,6 +601,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         StorageReference storageRef = storage.getReference();
         final StorageReference thisImageRef = storageRef.child("images/" + user.getUid() + "/"
                 + getIntent().getStringExtra("Session Id") + ".jpg");
+        final String thisImagePath = thisImageRef.getPath();
         try {
             InputStream stream = new FileInputStream(filename);
 
@@ -611,7 +616,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     Toast.makeText(getApplicationContext(), "upload success", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "uploadtest1");
-                    uploadResult(distanceScore, thisImageRef);
+                    uploadResult(distanceScore, thisImagePath);
                     Log.d(TAG, "uploadtest3");
 
                 }
@@ -621,19 +626,22 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         }
     }
 
-    public void uploadResult(Double distanceScore, StorageReference thisImageRef) {
+    public void uploadResult(Double distanceScore, String thisImagePath) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference sessionRef = mDatabase.child(getIntent().getStringExtra("Session Id"));
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Player player = new Player(user.getUid(), user.getDisplayName(), distanceScore, thisImageRef);
-        Log.d(TAG, "uploadtest1");
-        //sessionRef.updateChildren(player.toMap());
-        //ExitScreen();
+        DatabaseReference userRef = mDatabase.child("game_sessions").child(getIntent()
+                .getStringExtra("Session Id")).child(getIntent().getStringExtra("Player Letter"));
+        Player player = new Player(user.getUid(), user.getDisplayName(), distanceScore, thisImagePath, 0, 2);
+        Log.d(TAG, player.toMap().toString());
+        userRef.updateChildren(player.toMap());
+        ExitScreen();
     }
 
     private void ExitScreen() {
         Intent intent = new Intent(this, Muliti.class);
         intent.putExtra("Session Id", getIntent().getStringExtra("Session Id"));
+        intent.putExtra("Distance Score", Double.toString(Math.round(estimatedDistance)));
+        intent.putExtra("Player Letter", getIntent().getStringExtra("Player Letter"));
         startActivity(intent);
         finish();
     }

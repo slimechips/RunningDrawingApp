@@ -49,9 +49,9 @@ public class multiplay extends AppCompatActivity {
 
     public void voteclick (View view){
 
-        Intent intent = new Intent(this, Muliti.class);
+        //Intent intent = new Intent(this, Muliti.class);
 
-        startActivity(intent);
+        //startActivity(intent);
 
     }
 
@@ -59,16 +59,16 @@ public class multiplay extends AppCompatActivity {
 
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra("Session Id", getIntent().getStringExtra("Session Id"));
+        if (getIntent().getStringExtra("Player Letter")== null) {
+            intent.putExtra("Player Letter", "player_a");
+
+        } else {
+            intent.putExtra("Player Letter", getIntent().getStringExtra("Player Letter"));
+        }
         startActivity(intent);
     }
 
     public void setImage(TextView drawingName, ImageView drawingImage, String objectName) {
-
-        try {
-            objectName = objectName.substring(0, 1).toUpperCase() + objectName.substring(1);
-        } catch (Exception e) {
-            objectName = new String ("Dog");
-        }
 
         String _objectImageReference;
 
@@ -76,8 +76,15 @@ public class multiplay extends AppCompatActivity {
             _objectImageReference = (String)getResources().getText(getResources()
                     .getIdentifier(objectName, "string", getPackageName()));
         } catch (Exception e) {
-            _objectImageReference = new String("android.resource://com.example.chaewoon.chase_the_paint/drawable/dog");
+            _objectImageReference = new String("android.resource://com.example.chaewoon.chase_the_paint/drawable/cat");
         }
+
+        try {
+            objectName = objectName.substring(0, 1).toUpperCase() + objectName.substring(1);
+        } catch (Exception e) {
+            objectName = new String ("Dog");
+        }
+
         drawingName.setText(objectName);
         drawingImage.setImageURI(Uri.parse(_objectImageReference));
 

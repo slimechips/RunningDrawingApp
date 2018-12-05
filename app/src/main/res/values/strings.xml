@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Chase_the_Paint</string>
     <string name="title_activity_maps">Map</string>
+
     <string name="google_maps_key">AIzaSyAcNL9bZg13Yq6vZXQmdv_3bctOydgDlWc</string>
     <string name="title_activity_login">Sign in</string>
     <!-- Strings related to login -->
@@ -27,5 +28,4 @@
     <string name="text_drawing">text_drawing</string>
     <string name="text_players">text_players</string>
     <string name="image_drawing_join_small">image_drawing_join_small</string>
-
 </resources>

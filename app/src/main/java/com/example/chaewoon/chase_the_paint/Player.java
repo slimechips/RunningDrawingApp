@@ -14,7 +14,9 @@ public class Player {
     public String playerId;
     public String playerName;
     public Double distanceScore;
-    public StorageReference playerMapLocation;
+    public String playerMapLocation;
+    public Integer likes;
+    public Integer likesLeft;
 
     public Player(){
 
@@ -39,12 +41,23 @@ public class Player {
     }
 
 
-    public Player(String playerId, String playerName, Double distanceScore, StorageReference playerMapLocation) {
+    public Player(String playerId, String playerName, Double distanceScore, String playerMapLocation) {
 
         this.playerId = playerId;
         this.playerName = playerName;
         this.distanceScore = distanceScore;
         this.playerMapLocation = playerMapLocation;
+    }
+
+    public Player(String playerId, String playerName, Double distanceScore, String playerMapLocation,
+                  Integer likes, Integer likesLeft) {
+
+        this.playerId = playerId;
+        this.playerName = playerName;
+        this.distanceScore = distanceScore;
+        this.playerMapLocation = playerMapLocation;
+        this.likes = likes;
+        this.likesLeft = likesLeft;
     }
 
     @Exclude
@@ -74,7 +87,7 @@ public class Player {
                 player.playerId = (String) playerMap.get("playerId");
             }
             if (playerMap.containsKey("playerMapLocation")) {
-                player.playerMapLocation = (StorageReference) playerMap.get("playerMapLocation");
+                player.playerMapLocation = (String) playerMap.get("playerMapLocation");
             }
             Log.d("asdf", "one success");
             return player;
@@ -82,5 +95,10 @@ public class Player {
         else {
             return null;
         }
+    }
+
+    public final void addLikes(int likes) {
+
+        this.likes += likes;
     }
 }

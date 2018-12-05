@@ -171,10 +171,11 @@ public class FindGameActivity extends AppCompatActivity {
         cardGroup.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                joinGame(validSession.sessionId);
-                return false;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    joinGame(validSession.sessionId);
+                }
+                return true;
             }
-
         });
     }
 
@@ -192,15 +193,25 @@ public class FindGameActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     GameSession currentSession = new GameSession(dataSnapshot);
-                    if (!Objects.equals(userId, dataSnapshot.child("player_a").child("playerId"))
-                            &&!Objects.equals(userId, dataSnapshot.child("player_b").child("playerId").getValue())
-                            &&!Objects.equals(userId, dataSnapshot.child("player_c").child("playerId").getValue())
-                            &&!Objects.equals(userId, dataSnapshot.child("player_d").child("playerId").getValue())
-                            &&!Objects.equals(userId, dataSnapshot.child("player_e").child("playerId").getValue())) {
-                        Player currentUser = new Player(userId, userName, 0.0);
-                        currentSession.addPlayer(currentUser);
+                    String playerLetter = null;
+                    Player currentUser;
+                    if ((Long)dataSnapshot.child("player_count").getValue() > 5L)
+                    {Toast.makeText(getApplicationContext(), "Lobby Full", Toast.LENGTH_SHORT).show(); }
+                    else if (Objects.equals(userId, dataSnapshot.child("player_a").child("playerId").getValue()))
+                    { playerLetter = "player_a"; }
+                    else if (Objects.equals(userId, dataSnapshot.child("player_b").child("playerId").getValue()))
+                    { playerLetter = "player_b"; }
+                    else if (Objects.equals(userId, dataSnapshot.child("player_c").child("playerId").getValue()))
+                    { playerLetter = "player_c"; }
+                    else if (Objects.equals(userId, dataSnapshot.child("player_d").child("playerId").getValue()))
+                    { playerLetter = "player_d"; }
+                    else if (Objects.equals(userId, dataSnapshot.child("player_e").child("playerId").getValue()))
+                    { playerLetter = "player_e"; }
+                    else {
+                        currentUser = new Player(userId, userName, 0.0);
+                        playerLetter = currentSession.addPlayer(currentUser);
                     }
-                    goToMultiplayActivity(currentSession);
+                    goToMultiplayActivity(currentSession, playerLetter);
                 }
 
                 @Override
@@ -213,11 +224,12 @@ public class FindGameActivity extends AppCompatActivity {
         }
     }
 
-    public void goToMultiplayActivity(GameSession currentSession) {
+    public void goToMultiplayActivity(GameSession currentSession, String playerLetter) {
 
         Intent intent = new Intent(this, multiplay.class);
         intent.putExtra("Drawing Object", currentSession.drawingObject);
         intent.putExtra("Session Id", currentSession.sessionId);
+        intent.putExtra("Player Letter", playerLetter);
         startActivity(intent);
         finish();
     }
