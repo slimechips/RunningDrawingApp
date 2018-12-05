@@ -193,6 +193,7 @@ public class Muliti extends AppCompatActivity {
 
     }
     public int currentViewCount = 0;
+    public ChildEventListener childListener;
 
     private void setPlayerImageUpdater() {
         DatabaseReference _mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -202,7 +203,7 @@ public class Muliti extends AppCompatActivity {
                 .getStringExtra("Session Id"));
         final String[] playerRefs = new String[]{"player_a", "player_b", "player_c", "player_d", "player_e"};
 
-        sessionRef.addChildEventListener(new ChildEventListener() {
+        childListener = sessionRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if (Arrays.asList(playerRefs).contains(dataSnapshot.getKey())
@@ -263,6 +264,22 @@ public class Muliti extends AppCompatActivity {
 
         GlideApp.with(this).load(playerMapRef).into(currentImageView);
         Log.d("asdf", "glided finish");
+    }
+
+    @Override
+    protected void onStop () {
+        super.onStop();
+
+        try {
+            DatabaseReference _mDatabase = FirebaseDatabase.getInstance().getReference();
+            FirebaseUser _user = FirebaseAuth.getInstance().getCurrentUser();
+            final String _userId = _user.getUid();
+            final DatabaseReference sessionRef = _mDatabase.child("game_sessions").child(getIntent()
+                    .getStringExtra("Session Id"));
+            sessionRef.removeEventListener(childListener);
+        } catch (Exception e) {
+            //
+        }
     }
     /*public static Bitmap decodeSampledBitmapFromFile(String path, int reqWidth, int reqHeight) {
 

@@ -41,6 +41,7 @@ public class Player {
     }
 
 
+
     public Player(String playerId, String playerName, Double distanceScore, String playerMapLocation) {
 
         this.playerId = playerId;
@@ -78,7 +79,7 @@ public class Player {
             HashMap playerMap = (HashMap) playerObject;
             Player player = new Player();
             if (playerMap.containsKey("distanceScore")) {
-                player.distanceScore = (Double) playerMap.get("distanceScore");
+                player.distanceScore = ((Long)playerMap.get("distanceScore")).doubleValue();
             }
             if (playerMap.containsKey("playerName")) {
                 player.playerName = (String) playerMap.get("playerName");
