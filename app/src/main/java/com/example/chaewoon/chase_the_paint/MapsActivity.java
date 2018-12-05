@@ -121,7 +121,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL/2);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
     @Override
@@ -488,7 +488,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         Log.d("RotationGestureDetector", "Rotating");
         float angle = rotationDetector.getAngle();
         angle = (float) Math.toRadians(angle);
-        angle = angle * 0.1f;
+        angle = angle * 0.03f;
         Log.d("RotationGestureDetector", "Rotation: " + Float.toString(angle));
         LatLng centrePoint = newPoint;
         for (int j = 0 ; j < lines.size(); j++){
@@ -663,7 +663,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         intent.putExtra("Player Letter", getIntent().getStringExtra("Player Letter"));
         startActivity(intent);
         String filePath = filename.getPath();
-        openShareImageDialog(filename);
+        //openShareImageDialog(filename);
         finish();
     }
 
