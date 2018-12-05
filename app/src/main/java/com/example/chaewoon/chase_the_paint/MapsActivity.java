@@ -380,6 +380,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         }
     }
 
+    File filename;
+
+
     GoogleMap.SnapshotReadyCallback callback = new GoogleMap.SnapshotReadyCallback() {
 
         String imageName = "Map";
@@ -389,27 +392,19 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
             Bitmap bmImg = snapshot;
             OutputStream fout = null;
 
-            String filePath = "Map.jpeg";
-
-            File filename;
 
             try {
                 String path1 = android.os.Environment.getExternalStorageDirectory()
                         .toString();
-                Log.i("in save()", "after mkdir");
                 File file = new File(path1 + "/" + appName);
                 if (!file.exists())
                     file.mkdirs();
                 filename = new File(file.getAbsolutePath() + "/" + imageName
                         + ".jpg");
-                Log.i("in save()", "after file");
                 FileOutputStream out = new FileOutputStream(filename);
-                Log.i("in save()", "after outputstream");
                 bmImg.compress(Bitmap.CompressFormat.JPEG, 60, out);
                 out.flush();
                 out.close();
-                Log.i("in save()", "after outputstream closed");
-                //File parent = filename.getParentFile();
                 ContentValues image = getImageContent(filename);
                 Uri result = getContentResolver().insert(
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI, image);
@@ -417,7 +412,6 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
                         "File is Saved in  " + filename, Toast.LENGTH_SHORT).show();
                 uploadFile(estimatedDistance, filename);
             } catch (Exception e) {
-
                 e.printStackTrace();
             }
         }
@@ -624,6 +618,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "file not found", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public void uploadResult(Double distanceScore, String thisImagePath) {
@@ -637,12 +632,38 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         ExitScreen();
     }
 
+    public void openShareImageDialog(File filename)
+    {
+        //File file = this.getFileStreamPath(filename);
+
+        if(!filename.getPath().equals(""))
+        {
+            final ContentValues values = new ContentValues(2);
+            values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+            values.put(MediaStore.Images.Media.DATA, filename.getAbsolutePath());
+            Log.d(TAG, filename.getAbsolutePath());
+            final Uri contentUriFile = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+            intent.setType("image/jpeg");
+            intent.putExtra(android.content.Intent.EXTRA_STREAM, contentUriFile);
+            startActivity(Intent.createChooser(intent, "Share Image"));
+        }
+        else
+        {
+            //This is a custom class I use to show dialogs...simply replace this with whatever you want to show an error message, Toast, etc.
+            Toast.makeText(getApplicationContext(), R.string.toast_share_image_failed, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void ExitScreen() {
         Intent intent = new Intent(this, Muliti.class);
         intent.putExtra("Session Id", getIntent().getStringExtra("Session Id"));
         intent.putExtra("Distance Score", Double.toString(Math.round(estimatedDistance)));
         intent.putExtra("Player Letter", getIntent().getStringExtra("Player Letter"));
         startActivity(intent);
+        String filePath = filename.getPath();
+        openShareImageDialog(filename);
         finish();
     }
 

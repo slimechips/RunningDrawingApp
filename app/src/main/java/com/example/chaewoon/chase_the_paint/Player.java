@@ -78,7 +78,7 @@ public class Player {
             HashMap playerMap = (HashMap) playerObject;
             Player player = new Player();
             if (playerMap.containsKey("distanceScore")) {
-                player.distanceScore = (double) (long) playerMap.get("distanceScore");
+                player.distanceScore = (Double) playerMap.get("distanceScore");
             }
             if (playerMap.containsKey("playerName")) {
                 player.playerName = (String) playerMap.get("playerName");
