@@ -2,6 +2,10 @@
     <string name="app_name">Chase_the_Paint</string>
     <string name="title_activity_maps">Map</string>
     <string name="toast_share_image_failed">Share Image Failed</string>
+    <string name="time_left_text">Time Left:</string>
+    <string name="text_timer_default">600s</string>
+    <string name="text_distance">Distance (m):</string>
+    <string name="text_distance_field_default">0</string>
 
     <string name="google_maps_key">AIzaSyAcNL9bZg13Yq6vZXQmdv_3bctOydgDlWc</string>
     <string name="title_activity_login">Sign in</string>

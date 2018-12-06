@@ -151,7 +151,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
         timeLeft = new CountDownTimer(600000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                timertext.setText("Time left (s): " + millisUntilFinished / 1000);
+                timertext.setText("" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -342,7 +342,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener,
 
             //distance = Math.pow(distance, 2);
             estimatedDistance += distance;
-            distancebox.setText("Distance(m): " + String.format("%.02f", estimatedDistance));
+            distancebox.setText(String.format("%.02f", estimatedDistance));
             Log.d(TAG, "distance :" + estimatedDistance);
         } else {
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 14.0f));

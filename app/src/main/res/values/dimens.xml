@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="margin_left_text_card_small">110dp</dimen>
+    <dimen name="text_size_time_left">30sp</dimen>
+    <dimen name="text_size_distance_field">30sp</dimen>
 
     <dimen name="corner_radius_card_muliti">16dp</dimen>
     <dimen name="elevation_card_muliti">6dp</dimen>
@@ -10,7 +12,7 @@
     <dimen name="margin_vertical_card_muliti">18dp</dimen>
     <dimen name="margin_horizontal_image_muliti">40dp</dimen>
     <dimen name="margin_vertical_image_muliti">20dp</dimen>
-    <dimen name="margin_bottom_text_player_muliti">50dp</dimen>
+    <dimen name="margin_bottom_text_player_muliti">10dp</dimen>
     <dimen name="text_size_text_player_muliti">18sp</dimen>
     <dimen name="text_size_title_muliti">36sp</dimen>
 

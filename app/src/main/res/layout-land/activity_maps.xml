@@ -46,14 +46,27 @@
                 android:text="Hide Map" />
 
             <TextView
-                android:id="@+id/distanceField"
-                android:layout_width="324dp"
+                android:id="@+id/distanceText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginStart="0dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginBottom="31dp"
-                android:text="Distance: "
+                android:text="@string/text_distance"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/distanceField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/distanceText"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="22dp"
+                android:text="@string/text_distance_field_default"
+                android:textSize="@dimen/text_size_distance_field"
+                android:textColor="#000000"
                 android:textAlignment="viewStart" />
 
             <ImageView
@@ -119,15 +132,30 @@
                 android:layout_marginTop="30dp"
                 android:src="@drawable/selectionbox" />
 
+
             <TextView
-                android:id="@+id/timertext"
-                android:layout_width="136dp"
+                android:id="@+id/timerLeftText"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/time_left_text"
+                android:textAlignment="viewStart" />
+
+
+            <TextView
+                android:id="@+id/timertext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="0dp"
-                android:layout_marginEnd="455dp"
-                android:text="Time Left:"
+                android:layout_marginEnd="0dp"
+                android:layout_toEndOf="@+id/timerLeftText"
+                android:text="@string/text_timer_default"
+                android:textSize="@dimen/text_size_time_left"
+                android:textColor="#000000"
                 android:textAlignment="viewStart" />
 
             <Button

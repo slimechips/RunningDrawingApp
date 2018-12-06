@@ -77,70 +77,112 @@
 
         </GridLayout>
 
-        <TextView
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_host"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            app:cardBackgroundColor="?android:attr/colorPrimaryDark"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            style="@style/join_game_card" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_host"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"/>
 
-        <TextView
-            android:id="@+id/hostName"
+                <TextView
+                    android:id="@+id/hostName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="10dp"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginRight="4dp"/>
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="?android:attr/colorPrimary"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            style="@style/join_game_card" >
 
+            <LinearLayout
+                android:id="@+id/parent_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_players"
-            android:textSize="24sp"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_players"
+                    android:textSize="24sp"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
 
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:rowCount="2"
-            android:columnCount="2">
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:rowCount="2"
+                    android:columnCount="2">
 
-            <TextView
-                android:id="@+id/playerAName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                />
+                    <TextView
+                        android:id="@+id/playerAName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:textAlignment="center"
+                        />
 
-            <TextView
-                android:id="@+id/playerBName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                />
+                    <TextView
+                        android:id="@+id/playerBName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:textAlignment="center"
+                        />
 
-            <TextView
-                android:id="@+id/playerCName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                />
+                    <TextView
+                        android:id="@+id/playerCName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:textAlignment="center"
+                        />
 
-            <TextView
-                android:id="@+id/playerDName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                />
+                    <TextView
+                        android:id="@+id/playerDName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_rowWeight="1"
+                        android:layout_columnWeight="1"
+                        android:textAlignment="center"
+                        />
 
-        </GridLayout>
+                </GridLayout>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
     </LinearLayout>
