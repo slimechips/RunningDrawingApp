@@ -1,33 +1,44 @@
 {
-  "-LSp3bjl4WG0TZFntRvE" : {
-    "etumDcz4dTNdczPNTBiuUi6f6ib2" : {
-      "distanceScore" : 0,
-      "playerId" : "etumDcz4dTNdczPNTBiuUi6f6ib2",
-      "playerMapLocation" : "gs://chasethepaint.appspot.com/images/etumDcz4dTNdczPNTBiuUi6f6ib2/-LSp3bjl4WG0TZFntRvE.jpg",
-      "playerName" : "Three"
-    },
-    "y2sAdZutFPclwvQmte2Fngbc65k2" : {
-      "distanceScore" : 0,
-      "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
-      "playerMapLocation" : "gs://chasethepaint.appspot.com/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LSp3bjl4WG0TZFntRvE.jpg",
-      "playerName" : "Jason Chow"
-    }
-  },
   "game_sessions" : {
-    "-LSonwpsjU_TaRe4MlEV" : {
-      "drawingObject" : "dog",
+    "-LSzuCObkx3sOeIAu_Nt" : {
+      "drawingObject" : "orange",
       "player_a" : {
         "distanceScore" : 0,
+        "playerId" : "0JcTezQhvaQZ8Hf7bybfcFwV9a72",
+        "playerMapLocation" : "/images/0JcTezQhvaQZ8Hf7bybfcFwV9a72/-LSzuCObkx3sOeIAu_Nt.jpg",
+        "playerName" : "Two Typee"
+      },
+      "player_b" : {
+        "distanceScore" : 6.06604489555674,
         "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LSzuCObkx3sOeIAu_Nt.jpg",
         "playerName" : "Jason Chow"
       },
-      "player_count" : 1,
-      "session_id" : "-LSonwpsjU_TaRe4MlEV"
+      "player_count" : 2,
+      "session_ended" : false,
+      "session_id" : "-LSzuCObkx3sOeIAu_Nt"
     },
-    "-LSp3bjl4WG0TZFntRvE" : {
-      "drawingObject" : "ring",
+    "-LSzz6dcPSwoaYmEsY6G" : {
+      "drawingObject" : "apple",
       "player_a" : {
         "distanceScore" : 0,
+        "playerId" : "0JcTezQhvaQZ8Hf7bybfcFwV9a72",
+        "playerMapLocation" : "/images/0JcTezQhvaQZ8Hf7bybfcFwV9a72/-LSzz6dcPSwoaYmEsY6G.jpg",
+        "playerName" : "Two Typee"
+      },
+      "player_b" : {
+        "distanceScore" : 0,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LSzz6dcPSwoaYmEsY6G.jpg",
+        "playerName" : "Jason Chow"
+      },
+      "player_count" : 2,
+      "session_ended" : false,
+      "session_id" : "-LSzz6dcPSwoaYmEsY6G"
+    },
+    "-LT-1cyOpFzmDVRQCduo" : {
+      "drawingObject" : "ring",
+      "player_a" : {
         "playerId" : "0JcTezQhvaQZ8Hf7bybfcFwV9a72",
         "playerName" : "Two Typee"
       },
@@ -36,69 +47,34 @@
         "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
         "playerName" : "Jason Chow"
       },
-      "player_c" : {
-        "distanceScore" : 0,
-        "playerId" : "etumDcz4dTNdczPNTBiuUi6f6ib2",
-        "playerName" : "Three"
-      },
-      "player_count" : 3,
-      "session_id" : "-LSp3bjl4WG0TZFntRvE"
+      "player_count" : 2,
+      "session_ended" : false,
+      "session_id" : "-LT-1cyOpFzmDVRQCduo"
     },
-    "-LSrZVAjspdHJS8kVLJq" : {
-      "drawingObject" : "rose",
+    "-LT-29geFq3_r3fe5vob" : {
+      "drawingObject" : "cat",
       "player_a" : {
+        "distanceScore" : 0,
         "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LT-29geFq3_r3fe5vob.jpg",
         "playerName" : "Jason Chow"
       },
       "player_b" : {
         "distanceScore" : 0,
-        "playerId" : "etumDcz4dTNdczPNTBiuUi6f6ib2",
-        "playerName" : "Three"
+        "playerId" : "0JcTezQhvaQZ8Hf7bybfcFwV9a72",
+        "playerName" : "Two Typee"
       },
       "player_count" : 2,
       "session_ended" : false,
-      "session_id" : "-LSrZVAjspdHJS8kVLJq"
+      "session_id" : "-LT-29geFq3_r3fe5vob"
     },
-    "-LSs9szy2QL5DViBEtMN" : {
-      "drawingObject" : "rose",
-      "player_a" : {
-        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
-        "playerName" : "Jason Chow"
-      },
-      "player_b" : {
-        "distanceScore" : 0,
-        "playerId" : "etumDcz4dTNdczPNTBiuUi6f6ib2",
-        "playerName" : "Three"
-      },
-      "player_count" : 2,
-      "session_ended" : false,
-      "session_id" : "-LSs9szy2QL5DViBEtMN"
-    },
-    "-LSs9wwOPXNuShsjQ3Mh" : {
-      "drawingObject" : "heart",
-      "player_a" : {
-        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
-        "playerName" : "Jason Chow"
-      },
-      "player_count" : 1,
-      "session_ended" : false,
-      "session_id" : "-LSs9wwOPXNuShsjQ3Mh"
-    },
-    "-LSsA9eXzJzFEUrA6dIb" : {
-      "drawingObject" : "heart",
-      "player_a" : {
-        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
-        "playerName" : "Jason Chow"
-      },
-      "player_count" : 1,
-      "session_ended" : false,
-      "session_id" : "-LSsA9eXzJzFEUrA6dIb"
-    },
-    "-LSsB6cQdWbh1ezNQvbN" : {
+    "-LT-2x9pDUSJmkyoASDl" : {
       "drawingObject" : "cow",
       "player_a" : {
-        "playerId" : "wUEatLLILcUoESsINdRLmPEUVcL2",
-        "playerName" : "five"
+        "distanceScore" : 0,
+        "playerId" : "0JcTezQhvaQZ8Hf7bybfcFwV9a72",
+        "playerMapLocation" : "/images/0JcTezQhvaQZ8Hf7bybfcFwV9a72/-LT-2x9pDUSJmkyoASDl.jpg",
+        "playerName" : "Two Typee"
       },
       "player_b" : {
         "distanceScore" : 0,
@@ -107,7 +83,82 @@
       },
       "player_count" : 2,
       "session_ended" : false,
-      "session_id" : "-LSsB6cQdWbh1ezNQvbN"
+      "session_id" : "-LT-2x9pDUSJmkyoASDl"
+    },
+    "-LT-3mw-3Covt9sbPTZw" : {
+      "drawingObject" : "dog",
+      "player_a" : {
+        "distanceScore" : 0,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LT-3mw-3Covt9sbPTZw.jpg",
+        "playerName" : "Jason Chow"
+      },
+      "player_count" : 1,
+      "session_ended" : false,
+      "session_id" : "-LT-3mw-3Covt9sbPTZw"
+    },
+    "-LT-7buC0Z3ekHHEC2LX" : {
+      "drawingObject" : "ring",
+      "player_a" : {
+        "distanceScore" : 0,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LT-7buC0Z3ekHHEC2LX.jpg",
+        "playerName" : "Jason Chow"
+      },
+      "player_b" : {
+        "distanceScore" : 0,
+        "playerId" : "0JcTezQhvaQZ8Hf7bybfcFwV9a72",
+        "playerName" : "Two Typee"
+      },
+      "player_count" : 2,
+      "session_ended" : false,
+      "session_id" : "-LT-7buC0Z3ekHHEC2LX"
+    },
+    "-LT16nRV-P8sVuiYP8Dr" : {
+      "drawingObject" : "cat",
+      "player_a" : {
+        "distanceScore" : 1.239748953552306,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LT16nRV-P8sVuiYP8Dr.jpg",
+        "playerName" : "Jason Chow"
+      },
+      "player_count" : 1,
+      "session_ended" : false,
+      "session_id" : "-LT16nRV-P8sVuiYP8Dr"
+    },
+    "-LT1FaE37W3kB86nMsrv" : {
+      "drawingObject" : "cat",
+      "player_a" : {
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerName" : "Jason Chow"
+      },
+      "player_count" : 1,
+      "session_ended" : false,
+      "session_id" : "-LT1FaE37W3kB86nMsrv"
+    },
+    "-LT1FbenGxO_TrLI2P3T" : {
+      "drawingObject" : "apple",
+      "player_a" : {
+        "distanceScore" : 3.8479253398334565,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LT1FbenGxO_TrLI2P3T.jpg",
+        "playerName" : "Jason Chow"
+      },
+      "player_count" : 1,
+      "session_ended" : false,
+      "session_id" : "-LT1FbenGxO_TrLI2P3T"
+    },
+    "-LT1HRtJmt8Ue04pkF5J" : {
+      "drawingObject" : "orange",
+      "player_a" : {
+        "distanceScore" : 2.612062677865329,
+        "playerId" : "y2sAdZutFPclwvQmte2Fngbc65k2",
+        "playerMapLocation" : "/images/y2sAdZutFPclwvQmte2Fngbc65k2/-LT1HRtJmt8Ue04pkF5J.jpg",
+        "playerName" : "Jason Chow"
+      },
+      "player_count" : 1,
+      "session_ended" : false,
+      "session_id" : "-LT1HRtJmt8Ue04pkF5J"
     }
   },
   "users" : {
@@ -118,9 +169,19 @@
         "y2sAdZutFPclwvQmte2Fngbc65k2" : true
       },
       "game_sessions" : {
-        "-LSp3bjl4WG0TZFntRvE" : "ring"
+        "-LSzuCObkx3sOeIAu_Nt" : "orange",
+        "-LSzz6dcPSwoaYmEsY6G" : "apple",
+        "-LT-1cyOpFzmDVRQCduo" : "ring",
+        "-LT-2x9pDUSJmkyoASDl" : "cow"
       },
       "name" : "Two Typee"
+    },
+    "6rSlEhTozufTwTpyH5Zverh9zXr2" : {
+      "email" : "balexgood@gmail.com",
+      "friends" : {
+        "y2sAdZutFPclwvQmte2Fngbc65k2" : true
+      },
+      "name" : "Chaewoon Kim"
     },
     "etumDcz4dTNdczPNTBiuUi6f6ib2" : {
       "email" : "three_type@hotmail.com",
@@ -135,24 +196,24 @@
       "friends" : {
         "y2sAdZutFPclwvQmte2Fngbc65k2" : true
       },
-      "game_sessions" : {
-        "-LSsB6cQdWbh1ezNQvbN" : "cow"
-      },
       "name" : "five"
     },
     "y2sAdZutFPclwvQmte2Fngbc65k2" : {
       "email" : "jason.chowcs@gmail.com",
       "friends" : {
         "0JcTezQhvaQZ8Hf7bybfcFwV9a72" : true,
+        "6rSlEhTozufTwTpyH5Zverh9zXr2" : true,
         "etumDcz4dTNdczPNTBiuUi6f6ib2" : true,
         "wUEatLLILcUoESsINdRLmPEUVcL2" : true
       },
       "game_sessions" : {
-        "-LSonwpsjU_TaRe4MlEV" : "dog",
-        "-LSrZVAjspdHJS8kVLJq" : "rose",
-        "-LSs9szy2QL5DViBEtMN" : "rose",
-        "-LSs9wwOPXNuShsjQ3Mh" : "heart",
-        "-LSsA9eXzJzFEUrA6dIb" : "heart"
+        "-LT-29geFq3_r3fe5vob" : "cat",
+        "-LT-3mw-3Covt9sbPTZw" : "dog",
+        "-LT-7buC0Z3ekHHEC2LX" : "ring",
+        "-LT16nRV-P8sVuiYP8Dr" : "cat",
+        "-LT1FaE37W3kB86nMsrv" : "cat",
+        "-LT1FbenGxO_TrLI2P3T" : "apple",
+        "-LT1HRtJmt8Ue04pkF5J" : "orange"
       },
       "name" : "Jason Chow"
     }

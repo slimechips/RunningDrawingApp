@@ -68,6 +68,8 @@ public class Player {
         result.put("playerId", this.playerId);
         result.put("playerName", this.playerName);
         result.put("distanceScore", this.distanceScore);
+        result.put("likes", likes);
+        result.put("likesLeft", likesLeft);
         result.put("playerMapLocation", this.playerMapLocation);
         return result;
     }

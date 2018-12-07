@@ -48,6 +48,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/userCard"
                 android:layout_width= "match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -97,6 +98,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/playerACard"
                 android:layout_width= "match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -148,6 +150,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/playerBCard"
                 android:layout_width= "match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -198,6 +201,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/playerCCard"
                 android:layout_width= "match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -249,6 +253,7 @@
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/playerDCard"
                 android:layout_width= "match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
