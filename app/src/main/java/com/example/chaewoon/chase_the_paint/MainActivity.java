@@ -179,13 +179,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void singleClicked(View v) {
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
+/*        user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             Intent intent = new Intent(this, Singleplay.class);
             startActivity(intent);
         } else {
             Toast.makeText(this, "please sign in first", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
     public void multiClicked(View v) {
 
